@@ -135,7 +135,6 @@
       position: absolute; inset: 0; z-index: 1;
       background: url("assets/hero-playa-la-ropa.webp") center/cover no-repeat;
     }
-    .hero-video { position: absolute; inset: 0; z-index: 2; object-fit: cover; }
     .hero-shade {
       position: absolute; inset: 0; z-index: 3;
       background:
@@ -172,8 +171,6 @@
     }
     .hero-curve { position: absolute; z-index: 6; bottom: -1px; left: 0; width: 100%; height: clamp(60px, 8vw, 105px); }
 
-    @media (max-width: 760px) { .hero-video { display: none; } }
-    @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
 
     /* Layout helpers */
     .warm { background: var(--cream); }
@@ -368,9 +365,6 @@
     <section class="hero" id="hero">
       <div class="hero-media" data-parallax>
         <div class="hero-fallback"></div>
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-playa-la-ropa.webp">
-          <source src="assets/video/la-roca-waves.mp4" type="video/mp4" />
-        </video>
       </div>
       <div class="hero-shade"></div>
       <div class="hero-content">
@@ -558,7 +552,6 @@
     const header = document.getElementById('header');
     const menuButton = document.querySelector('.menu-button');
     const mobileNav = document.getElementById('mobileNav');
-    const heroVideo = document.querySelector('.hero-video');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 760px)').matches;
 
@@ -619,10 +612,6 @@
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       updateParallax();
-    }
-
-    if (heroVideo) {
-      heroVideo.addEventListener('error', () => { heroVideo.style.display = 'none'; });
     }
 
     const newsletterForm = document.querySelector('.newsletter form');
