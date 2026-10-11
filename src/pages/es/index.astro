@@ -1,3 +1,6 @@
+---
+import Seo from "../../components/Seo.astro";
+---
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,17 +14,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Descubre El Ensueño y El Murmullo, dos Luxury Villas privadas excepcionales de La Casa Que Canta en Zihuatanejo, México." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Luxury Villas por La Casa Que Canta | Zihuatanejo" />
-  <meta property="og:description" content="Descubre El Ensueño y El Murmullo, dos Luxury Villas privadas excepcionales de La Casa Que Canta en Zihuatanejo, México." />
-  <meta property="og:url" content="https://github.com/o7digital/luxuryvillas.com/es/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Luxury Villas por La Casa Que Canta | Zihuatanejo" />
-  <meta name="twitter:description" content="Descubre El Ensueño y El Murmullo, dos Luxury Villas privadas excepcionales de La Casa Que Canta en Zihuatanejo, México." />
-  <title>Luxury Villas por La Casa Que Canta | Zihuatanejo</title>
-  <link rel="alternate" hreflang="en" href="/" />
-  <link rel="alternate" hreflang="es" href="/es/" />
+  <Seo title="Luxury Villas por La Casa Que Canta | Zihuatanejo" description="Descubre El Ensueño y El Murmullo, dos Luxury Villas privadas excepcionales de La Casa Que Canta en Zihuatanejo, México." path="/es/" lang="es" localized={true} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
@@ -31,7 +24,9 @@
       "@type": "LodgingBusiness",
       "name": "Luxury Villas por La Casa Que Canta",
       "description": "Descubre El Ensueño y El Murmullo, dos Luxury Villas privadas excepcionales de La Casa Que Canta en Zihuatanejo, México.",
-      "url": "https://github.com/o7digital/luxuryvillas.com/es/",
+      "url": "https://www.lascasasboutiquehotel.com/es/",
+      "@id": "https://www.lascasasboutiquehotel.com/#luxury-villas",
+      "image": "https://www.lascasasboutiquehotel.com/assets/hero-playa-la-ropa.webp",
       "telephone": "+52 755 555 7000",
       "email": "sales.reservations@lacasaquecanta.com",
       "address": {
@@ -39,12 +34,7 @@
         "addressLocality": "Zihuatanejo",
         "addressRegion": "Guerrero",
         "addressCountry": "MX"
-      },
-      "sameAs": [
-        "https://www.lacasaquecanta.com/",
-        "https://www.el-ensueno.com/",
-        "https://www.el-murmullo.com/"
-      ]
+      }
     }
   </script>
   <style is:inline>
