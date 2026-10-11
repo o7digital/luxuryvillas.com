@@ -1,0 +1,23 @@
+---
+import keywords from '../data/footer-keywords.json';
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+---
+<div class="footer-keywords" lang={lang}>
+  <p>{keywords[lang].join(' · ')}</p>
+</div>
+<style>
+  .footer-keywords {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    color: #b7b9b2;
+    text-align: center;
+    font-size: .75rem;
+    line-height: 2;
+  }
+  .footer-keywords p { margin: 0; overflow-wrap: anywhere; }
+  @media (max-width: 760px) {
+    .footer-keywords { font-size: .75rem; line-height: 1.9; margin-top: 1.5rem; }
+  }
+</style>
