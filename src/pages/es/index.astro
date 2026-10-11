@@ -1,4 +1,5 @@
 ---
+import ContactForm from '../../components/ContactForm.astro';
 import FooterKeywords from "../../components/FooterKeywords.astro";
 import Seo from "../../components/Seo.astro";
 ---
@@ -307,6 +308,14 @@ import Seo from "../../components/Seo.astro";
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
 
+    @media (min-width: 761px) and (max-width: 1250px) {
+      .site-header { gap: .8rem; padding-left: 2vw; padding-right: 2vw; }
+      .brand-copy { display: none; }
+      .main-nav { gap: 1rem; font-size: .75rem; letter-spacing: .08em; }
+      .header-actions { gap: .8rem; }
+      .book-link, .language { font-size: .75rem; }
+    }
+
     @media (max-width: 760px) {
       .site-header { grid-template-columns: 1fr auto; padding: 1.1rem; }
       .main-nav, .header-actions .book-link, .language { display: none; }
@@ -347,6 +356,7 @@ import Seo from "../../components/Seo.astro";
       <a href="#villas">Las Luxury Villas</a>
       <a href="#experience">La Experiencia</a>
       <a href="#story">Nuestra Historia</a>
+      <a href="#contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia <span aria-hidden="true">↗</span></a>
@@ -359,6 +369,7 @@ import Seo from "../../components/Seo.astro";
     <a href="#villas">Las Luxury Villas</a>
     <a href="#experience">La Experiencia</a>
     <a href="#story">Nuestra Historia</a>
+      <a href="#contact">Contacto</a>
     <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia <span aria-hidden="true">↗</span></a>
   </nav>
 
@@ -493,7 +504,9 @@ import Seo from "../../components/Seo.astro";
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <ContactForm lang="es" />
+
+    <section class="contact" id="plan-your-stay">
       <div class="contact-bg" data-parallax></div>
       <div class="contact-overlay"></div>
       <div class="contact-content" data-reveal>
