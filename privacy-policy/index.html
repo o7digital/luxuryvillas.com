@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GJHH1XBZJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3GJHH1XBZJ');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Luxury Villas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #151914;
+      --cream: #f3efe6;
+      --warm-white: #FAF8F3;
+      --deep-green: #141815;
+      --gold: #c9a86a;
+      --sand: #C5A96A;
+      --sage: #727B6A;
+      --muted: #6e716a;
+      --line: rgba(21, 25, 20, 0.14);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    button, input { font: inherit; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .grain {
+      position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 60;
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.5rem;
+      padding: 1.7rem 4vw; color: #fff;
+      transition: padding .4s ease, background .4s ease, backdrop-filter .4s ease, border-color .4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.is-scrolled {
+      padding-top: 1rem; padding-bottom: 1rem;
+      background: rgba(17, 21, 17, .84);
+      backdrop-filter: blur(16px);
+      border-color: rgba(255,255,255,.12);
+    }
+    .brand { display: inline-flex; align-items: center; gap: .8rem; width: max-content; }
+    .brand-logo { width: 160px; height: auto; object-fit: contain; }
+    .brand-copy { font-size: .68rem; letter-spacing: .19em; line-height: 1.2; text-transform: uppercase; }
+    .brand-copy small { display: block; font-size: .5rem; letter-spacing: .28em; margin-top: .3rem; opacity: .7; }
+    .main-nav { display: flex; justify-content: center; align-items: center; gap: clamp(1.4rem, 2.4vw, 2.8rem); font-size: .92rem; text-transform: uppercase; letter-spacing: .13em; }
+    .main-nav a { position: relative; padding: .5rem 0; }
+    .main-nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: currentColor;
+      transform: scaleX(0); transform-origin: right; transition: transform .35s ease;
+    }
+    .main-nav a:hover::after, .main-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+    .header-actions { display: flex; align-items: center; gap: 1.4rem; justify-self: end; }
+    .book-link { font-size: .88rem; text-transform: uppercase; letter-spacing: .13em; position: relative; }
+    .book-link span { color: var(--gold); font-size: 1rem; margin-left: .5rem; }
+    .language { border: 0; background: none; color: inherit; cursor: pointer; font-size: .88rem; letter-spacing: .13em; text-transform: uppercase; opacity: .9; }
+    .language span { opacity: .7; }
+    .menu-button {
+      display: none; position: relative; width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.5); background: rgba(255,255,255,.05); color: #fff; cursor: pointer;
+    }
+    .menu-button::before, .menu-button::after {
+      content: ""; position: absolute; left: 11px; right: 11px; height: 1.5px; background: currentColor;
+      transition: transform .3s ease, top .3s ease;
+    }
+    .menu-button::before { top: 16px; } .menu-button::after { top: 24px; }
+    .menu-button.is-open::before { top: 20px; transform: rotate(45deg); }
+    .menu-button.is-open::after { top: 20px; transform: rotate(-45deg); }
+
+    .mobile-nav {
+      position: fixed; inset: 0 0 auto 0; top: 0; z-index: 55;
+      display: flex; flex-direction: column; gap: .2rem;
+      padding: 6.5rem 1.5rem 2.5rem; background: rgba(15, 19, 15, .97); color: #fff;
+      opacity: 0; visibility: hidden; transform: translateY(-16px);
+      transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+    }
+    .mobile-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mobile-nav a { padding: .9rem 0; font-family: var(--serif); font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .mobile-nav .book-link { margin-top: .6rem; font-family: var(--sans); font-size: .72rem; border-bottom: 0; }
+
+    /* Hero */
+    .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("assets/home-beach.webp") center/cover no-repeat; }
+    .hero-shade {
+      position: absolute; inset: 0; z-index: 3;
+      background:
+        linear-gradient(180deg, rgba(5,12,10,.46) 0, rgba(5,12,10,.28) 120px, transparent 280px),
+        linear-gradient(90deg, rgba(5,12,10,.48) 0%, rgba(5,12,10,.18) 55%, rgba(5,12,10,.08) 100%),
+        linear-gradient(0deg, rgba(5,10,8,.58), transparent 65%);
+    }
+    .hero-content {
+      position: relative; z-index: 5; height: 100%;
+      padding: 0 7vw 9vh; display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .eyebrow { text-transform: uppercase; letter-spacing: .27em; font-size: .68rem; margin: 0 0 1.5rem; color: #ebd4a4; }
+    .eyebrow.dark { color: #9b7d45; }
+    .hero h1, .intro h2, .section-head h2, .immersive h2, .manifesto h2, .contact h2 {
+      font-family: var(--serif); font-weight: 500; letter-spacing: -.045em; margin: 0; line-height: .94;
+    }
+    .hero h1 { font-size: clamp(3.6rem, 8vw, 7.6rem); max-width: 1000px; text-shadow: 0 20px 45px rgba(0,0,0,.2); }
+    .hero h1 em, .intro h2 em, .section-head h2 em, .immersive h2 em, .manifesto h2 em, .contact h2 em { font-style: italic; }
+    .hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-top: 2.1rem; max-width: 1080px; flex-wrap: wrap; }
+    .hero-bottom p { font-size: .95rem; line-height: 1.6; font-weight: 400; max-width: 30rem; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+    .hero .eyebrow { color: #fff; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+    .hero-ctas { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .8rem; padding: .95rem 1.5rem; border-radius: 999px;
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .17em; border: 1px solid transparent;
+      transition: transform .35s ease, background .35s ease, color .35s ease, border-color .35s ease;
+    }
+    .btn:hover, .btn:focus-visible { transform: translateY(-2px); }
+    .btn-solid { background: var(--cream); color: var(--ink); }
+    .btn-solid:hover { background: rgba(243,239,230,.1); color: #fff; border-color: rgba(255,255,255,.6); }
+    .btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    .hero-ctas .btn { font-weight: 600; }
+    .hero-ctas .btn-ghost { background: #18211e; border-color: rgba(255,255,255,.8); color: #fff; }
+    .hero-ctas .btn-ghost:hover, .hero-ctas .btn-ghost:focus-visible { background: #2c3c34; border-color: #fff; }
+    .hero-ctas .btn-solid:hover, .hero-ctas .btn-solid:focus-visible { background: #fff; color: var(--ink); }
+    .hero-ctas .btn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+    .coast-label {
+      position: absolute; z-index: 5; right: 3vw; top: 50%; transform: rotate(90deg) translateX(50%); transform-origin: right top;
+      font-size: .58rem; letter-spacing: .24em; opacity: .68;
+    }
+    .hero-curve { position: absolute; z-index: 6; bottom: -1px; left: 0; width: 100%; height: clamp(60px, 8vw, 105px); }
+
+
+    /* Layout helpers */
+    .warm { background: var(--cream); }
+    .section-pad { padding: clamp(4.5rem, 8vw, 9rem) 7vw; }
+
+    /* Intro/story */
+    .intro { padding: clamp(5rem, 9vw, 7.5rem) 7vw clamp(4rem, 7vw, 5.6rem); display: grid; grid-template-columns: .35fr 1.45fr .8fr; gap: 4vw; }
+    .intro-index { font-family: var(--serif); font-size: .9rem; color: #9f8e70; }
+    .intro h2 { font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
+    .intro-text { padding-top: 3.4rem; }
+    .intro-text p { font-family: var(--serif); font-size: 1.15rem; line-height: 1.55; color: #484b44; margin: 0; }
+    .text-link { margin-top: 1.4rem; display: inline-flex; gap: 1.2rem; text-transform: uppercase; font-size: .64rem; letter-spacing: .18em; border-bottom: 1px solid #b3a486; padding-bottom: .5rem; }
+
+    /* Editorial */
+    .editorial { padding: 0 7vw clamp(5rem, 9vw, 8.5rem); display: grid; grid-template-columns: 1.35fr .65fr; gap: 6vw; align-items: end; }
+    .editorial-image { height: clamp(380px, 55vw, 620px); position: relative; overflow: hidden; border-radius: 6px; }
+    .editorial-image img { transition: transform 1.2s ease; }
+    .editorial-image:hover img { transform: scale(1.03); }
+    .image-note {
+      position: absolute; left: 1.2rem; bottom: 1.2rem; background: rgba(243,239,230,.92); backdrop-filter: blur(10px);
+      padding: .7rem 1rem; text-transform: uppercase; font-size: .58rem; letter-spacing: .18em;
+    }
+    .editorial-quote { padding-bottom: 1rem; }
+    .mini-line { display: block; width: 44px; height: 1px; background: var(--gold); margin-bottom: 1.8rem; }
+    .editorial-quote blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 2.3vw, 2.5rem); line-height: 1.32; margin: 0 0 1.6rem; }
+    .editorial-quote p { font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: #817967; margin: 0; }
+
+    /* Villas */
+    .villas { background: var(--deep-green); color: #fff; padding: clamp(5rem, 9vw, 8.5rem) 7vw; }
+    .section-head { display: grid; grid-template-columns: 1.2fr .6fr; align-items: end; gap: 8vw; margin-bottom: clamp(2.6rem, 5vw, 4.2rem); }
+    .section-head h2 { font-size: clamp(3rem, 5.6vw, 6.4rem); }
+    .section-head > p { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: #aeb1ab; padding-bottom: .4rem; }
+    .villa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; }
+    .villa-card { display: flex; flex-direction: column; }
+    .villa-image { position: relative; height: clamp(360px, 46vw, 620px); overflow: hidden; }
+    .villa-image img { transition: transform 1.2s cubic-bezier(.22,.61,.36,1); }
+    .villa-card:hover .villa-image img, .villa-card:focus-within .villa-image img { transform: scale(1.035); }
+    .villa-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(7,11,9,.5), transparent 45%); }
+    .villa-number {
+      position: absolute; left: 1.2rem; top: 1.2rem; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.92); color: var(--ink); display: grid; place-items: center;
+      font-family: var(--serif); font-size: .85rem;
+    }
+    .villa-open {
+      position: absolute; right: 1.2rem; bottom: 1.2rem; width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(255,255,255,.92); color: var(--ink); display: grid; place-items: center; font-size: 1.1rem;
+      transition: transform .3s ease;
+    }
+    .villa-card:hover .villa-open, .villa-card:focus-within .villa-open { transform: rotate(45deg); }
+    .villa-meta { padding-top: 1.7rem; }
+    .villa-meta p.eyebrow { margin: 0 0 .5rem; font-size: .62rem; letter-spacing: .17em; color: #b7b9b2; }
+    .villa-meta h3 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 500; margin: 0 0 .8rem; }
+    .villa-meta > p.desc { font-family: var(--serif); font-size: .98rem; line-height: 1.55; color: #cdd0c8; max-width: 34rem; margin: 0 0 1.2rem; }
+    .villa-tags { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; list-style: none; padding: 0; margin: 0 0 1.4rem; font-size: .8rem; color: #d7d9d2; }
+    .villa-tags li { padding-right: 1.1rem; border-right: 1px solid rgba(255,255,255,.18); }
+    .villa-tags li:last-child { border: 0; padding-right: 0; }
+    .villa-features { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1.6rem; }
+    .villa-features div { display: flex; align-items: baseline; gap: .8rem; }
+    .villa-features span { color: var(--gold); font-size: .62rem; letter-spacing: .12em; }
+    .villa-features p { margin: 0; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #cfd2c9; }
+
+    /* Immersive */
+    .immersive { min-height: 100vh; position: relative; color: #fff; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(5.5rem, 9vw, 8.5rem) 7vw 0; }
+    .immersive-bg { position: absolute; inset: -5%; will-change: transform; }
+    .immersive-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,16,13,.68), rgba(12,16,13,.12)), linear-gradient(0deg, rgba(12,16,13,.62), transparent 55%); }
+    .immersive-copy { position: relative; z-index: 2; width: min(820px, 74vw); }
+    .immersive h2 { font-size: clamp(3.1rem, 6.6vw, 5.8rem); }
+    .immersive-copy > p.lead-copy { width: min(460px, 100%); font-family: var(--serif); font-size: 1.05rem; line-height: 1.6; margin: 1.8rem 0 0; }
+    .experience-rail {
+      position: relative; z-index: 2; margin: clamp(3rem, 6vw, 5.4rem) -7vw 0;
+      padding: 1.8rem 7vw 2.2rem; background: rgba(10,14,11,.52); backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,.16);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .experience-rail > div { padding: 0 1.6rem; border-right: 1px solid rgba(255,255,255,.13); }
+    .experience-rail > div:first-child { padding-left: 0; }
+    .experience-rail > div:last-child { border: 0; }
+    .experience-rail span { font-size: .58rem; color: #e0c58d; letter-spacing: .18em; }
+    .experience-rail strong { display: block; font-family: var(--serif); font-size: 1.25rem; font-weight: 500; margin: .9rem 0 .35rem; }
+    .experience-rail small { font-size: .72rem; opacity: .68; }
+
+    /* Manifesto */
+    .manifesto { padding: clamp(5.5rem, 9vw, 8.5rem) 7vw; }
+    .manifesto-top { font-size: .58rem; letter-spacing: .28em; color: #8f7f62; }
+    .manifesto h2 { font-size: clamp(2.9rem, 7vw, 6rem); max-width: 1100px; margin-top: 1.6rem; }
+    .manifesto-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: end; margin-top: clamp(2.6rem, 6vw, 4.4rem); }
+    .manifesto-grid > p { max-width: 32rem; margin: 0 0 .6rem auto; font-family: var(--serif); font-size: 1.1rem; line-height: 1.6; color: #51544d; }
+    .seal { width: 130px; height: 130px; border: 1px solid #a6926a; border-radius: 50%; display: grid; place-items: center; grid-column: 1; grid-row: 1; }
+    .seal span { text-align: center; font-size: .58rem; line-height: 1.7; letter-spacing: .2em; color: #8e774d; }
+
+    /* Final CTA */
+    .contact { min-height: 78vh; position: relative; color: #fff; display: grid; place-items: center; text-align: center; overflow: hidden; }
+    .contact-bg { position: absolute; inset: 0; background: url("assets/el-murmullo-closing.webp") center/cover no-repeat; transform: scale(1.06); }
+    .contact-overlay { position: absolute; inset: 0; background: rgba(13,16,13,.5); }
+    .contact-content { position: relative; z-index: 2; padding: 3rem 0; }
+    .contact h2 { font-size: clamp(2.9rem, 7vw, 6.2rem); }
+    .contact-content p.lead-copy { max-width: 32rem; margin: 1.4rem auto 2rem; font-family: var(--serif); font-size: 1.1rem; line-height: 1.5; color: rgba(255,255,255,.8); }
+    .contact-ctas { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; }
+
+    /* Footer */
+    footer.site-footer { background: #101411; color: #deded8; padding: clamp(3.5rem, 6vw, 5rem) 7vw 2.4rem; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.6rem; padding-bottom: 2.4rem; }
+    .footer-brand { display: flex; align-items: center; gap: .8rem; color: #fff; margin-bottom: 1rem; }
+    .footer-logo { width: 140px; height: auto; object-fit: contain; }
+    footer p.tagline { line-height: 1.7; color: #8f948e; margin: 0; font-size: .78rem; }
+    .footer-column { display: flex; flex-direction: column; gap: .6rem; font-size: .78rem; }
+    .footer-column h3 { margin: 0 0 .6rem; color: #fff; text-transform: uppercase; font-size: .6rem; letter-spacing: .2em; }
+    .footer-column a:hover, .footer-column a:focus-visible { color: #fff; }
+    .newsletter p { margin: 0 0 .7rem; color: #8f948e; }
+    .newsletter form { display: flex; border-bottom: 1px solid rgba(255,255,255,.22); }
+    .newsletter input { flex: 1; min-width: 0; padding: .7rem 0; border: 0; background: transparent; color: #fff; font-family: var(--serif); outline: none; }
+    .newsletter input::placeholder { color: rgba(255,255,255,.4); }
+    .newsletter button { width: 36px; border: 0; background: transparent; color: #fff; font-size: 1.1rem; cursor: pointer; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.4rem; margin-top: 1.4rem; border-top: 1px solid #272c28; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #626862; }
+
+    /* Reveal utility */
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); }
+    [data-reveal="right"] { transform: translateX(24px); }
+    [data-reveal="image"] { transform: translateY(32px) scale(.98); }
+    [data-reveal].is-visible { opacity: 1; transform: translate(0,0) scale(1); }
+
+    @media (max-width: 1100px) {
+      .intro { grid-template-columns: 1fr 1fr; }
+      .intro-index { display: none; }
+      .editorial { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 1.6rem; }
+      .villa-grid { grid-template-columns: 1fr; gap: 3.6rem; }
+      .experience-rail { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+      .experience-rail > div { border-right: 0; padding: 0; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .manifesto-grid > p { margin: 0; }
+      .seal { grid-row: auto; grid-column: auto; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .site-header { grid-template-columns: 1fr auto; padding: 1.1rem; }
+      .main-nav, .header-actions .book-link, .language { display: none; }
+      .menu-button { display: inline-block; }
+      .hero-content { padding: 0 1.3rem 4.5rem; }
+      .hero-bottom { align-items: flex-start; flex-direction: column; }
+      .coast-label { display: none; }
+      .intro { grid-template-columns: 1fr; padding: 5.6rem 1.3rem 3.6rem; gap: 1.6rem; }
+      .intro-text { padding-top: .4rem; }
+      .editorial { padding: 0 1.3rem 4.5rem; }
+      .villas, .immersive, .manifesto { padding-left: 1.3rem; padding-right: 1.3rem; }
+      .villa-image { height: 62vw; }
+      .experience-rail { margin: 2.6rem -1.3rem 0; padding: 1.3rem 1.3rem 1.6rem; grid-template-columns: 1fr 1fr; }
+      .contact { min-height: 68vh; padding: 3rem 1.3rem; }
+      footer.site-footer { padding: 3rem 1.3rem 1.6rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 1.8rem; }
+      .footer-bottom { flex-direction: column; }
+      .btn { width: 100%; justify-content: space-between; }
+      .hero-ctas { width: 100%; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+  <meta name="description" content="Privacy Policy: collection, use and protection of personal data, and your privacy rights." />
+  <style>
+    .privacy-content { max-width: 900px; margin: 0 auto; padding: 150px 24px 70px; }
+    .privacy-content h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 2rem; }
+    .privacy-content h3 { font-size: 1.3rem; margin: 2rem 0 1rem; }
+    .privacy-content p, .privacy-content li { line-height: 1.8; }
+    .privacy-content p { margin: 1rem 0; }
+    .privacy-content ul { padding-left: 1.5rem; }
+    .privacy-content a { text-decoration: underline; overflow-wrap: anywhere; }
+    .privacy-content hr { margin: 2rem 0; border: 0; border-top: 1px solid #d5d0c5; }
+    .site-header { background: var(--cream); color: var(--ink); }
+  </style>
+</head>
+<body id="top">
+  <header class="site-header" id="header">
+    <a class="brand" href="/#top" aria-label="Luxury Villas by La Casa Que Canta home">
+      <img class="brand-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
+      <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="/#villas">The Luxury Villas</a>
+      <a href="/#experience">The Experience</a>
+      <a href="/#story">Our Story</a>
+    </nav>
+    <div class="header-actions">
+      <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay <span aria-hidden="true">↗</span></a>
+      <a class="language" href="/es/" aria-label="Change language">EN <span>⌄</span></a>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"></button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="/#villas">The Luxury Villas</a>
+    <a href="/#experience">The Experience</a>
+    <a href="/#story">Our Story</a>
+    <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay <span aria-hidden="true">↗</span></a>
+  </nav>
+
+<main class="privacy-content"><h1>Privacy Policy</h1><section> <p> <strong>In “La Casa Que Canta”</strong> (hereinafter <strong>CASACANTA ZIHUA SA DE CV</strong>), we are aware of the importance of maintaining the confidentiality of personal and sensitive information of our guests and clients. We are committed to protecting your information and privacy in accordance with:
+</p> <ul> <li>The <strong>Federal Law on the Protection of Personal Data Held by Private Parties</strong> (Mexico)</li> <li>The <strong>General Data Protection Regulation (GDPR)</strong> of the European Union</li> <li>The <strong>California Consumer Privacy Act (CCPA)</strong> in the United States</li> </ul> <p>Below we provide you with important information regarding the collection, use, and protection of your personal data.</p> <hr> <h3>1. Data Collection</h3> <p>We may collect personal information at any of the contact and interaction points we have with our clients, including:</p> <ul> <li>Our website and reservation system</li> <li>Information sent to or shared through our social media platforms</li> <li>Our internal systems and during your visit to the hotel</li> </ul> <p>This information may include:</p> <ul> <li>Contact details (name, phone number, email, address)</li> <li>Information related to your booking, stay, or visit</li> <li>Payment data (credit card, TAX ID, business activity)</li> <li>Personal characteristics, nationality, passport or official ID number, and place and date of issue</li> <li>Travel history and preferences during your stay</li> <li>Data on travel companions (name, preferences)</li> <li>Medical information voluntarily provided to improve your experience</li> <li>Marketing and communication preferences</li> <li>Feedback and comments about our services</li> </ul> <hr> <h3>2. Use of Personal and Sensitive Information</h3> <p>CASACANTA ZIHUA SA DE CV uses this information to provide the services you requested or those related to a reservation, transaction, or program. We may also use your data to:</p> <ul> <li>Improve our services and offer the level of hospitality you expect</li> <li>Ensure that our website, products, and services meet your interests</li> <li>Process payments, refunds, and other service-related requests</li> <li>Send communications regarding services, promotions, and special events (with your prior consent)</li> </ul> <p>The legal basis for processing your data includes:</p> <ul> <li>Your consent</li> <li>The execution of a contract (your reservation)</li> <li>Our legitimate interest (to improve services)</li> </ul> <p>All in accordance with applicable Mexican law, the GDPR, and the CCPA.</p> <hr> <h3>3. Data Transfers</h3> <p>We may transfer your personal data to:</p> <ul> <li>IT service providers operating our technological infrastructure (servers, reservation systems, etc.)</li> <li>Medical providers, in case of emergency</li> <li>Competent authorities, when required by law</li> </ul> <p>If you do not object, we will assume that you authorize these transfers.</p> <p><strong>Note for EU residents:</strong> We only transfer personal data outside the European Economic Area (EEA) to countries that ensure an adequate level of protection, or under Standard Contractual Clauses approved by the European Commission.</p> <p><strong>Note for California residents (USA):</strong> We do not sell your personal information as defined under the CCPA.</p> <hr> <h3>4. Security Measures</h3> <p>We have implemented physical, technical, and administrative safeguards to protect your personal data from unauthorized access, loss, alteration, or misuse. These include:</p> <ul> <li>SSL encryption on our website and reservation systems</li> <li>Internal access controls and staff training</li> <li>Secure backups and system monitoring</li> </ul> <hr> <h3>5. ARCO Rights and Other Applicable Rights</h3> <p>In accordance with Mexican law, you have the right to Access, Rectify, Cancel, or Oppose the processing of your personal data (ARCO rights).</p> <p>Additionally, under GDPR and CCPA, you may also exercise the following rights:</p> <ul> <li>Data portability (EU)</li> <li>Restriction of processing</li> <li>Right to erasure (“right to be forgotten”)</li> <li>Right to opt out of marketing or data sharing (California)</li> </ul> <p>You may submit your request to exercise any of these rights by writing to our Reservations and Sales Department: <a href="mailto:sales.reservations@lacasaquecanta.com">sales.reservations@lacasaquecanta.com</a> · <a href="tel:+527555557000">+52 (755) 555 7000</a></p> <p><strong>Response Time:</strong> Within 20 business days from the date of receipt of your request, if it is deemed admissible, the corresponding action will be taken within 15 business days following the date on which the response is communicated.</p> <p>We will respond through the contact method you indicate in your request and within the timeframe established by applicable law.</p> <hr> <h3>6. Data Retention</h3> <p>We retain your personal data only for as long as necessary to fulfill the purposes described above, or as required by applicable tax or legal regulations.</p> <hr> <h3>7. Modifications to this Privacy Notice</h3> <p>This privacy notice may be updated at any time. Changes will be published on our website: <a href="https://www.lascasasboutiquehotel.com/">www.lascasasboutiquehotel.com</a> · Last update: August 2025</p> <hr> <h3>8. Identity and Address of the Data Controller</h3> <p><strong>CASACANTA ZIHUA SA DE CV</strong></p> <ul> <li>Fiscal Address: Montes Urales 754, Floor 5, Lomas de Chapultepec I Sección, 11000 CDMX, Mexico</li> <li>Hotel Address: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., Mexico</li> </ul> <p>© All rights reserved Casacanta Zihuat</p> </section></main>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img class="footer-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
+          <span class="brand-copy">Luxury Villas<small>Zihuatanejo</small></span>
+        </div>
+        <p class="tagline">Private Luxury Villas above Playa La Ropa<br />Zihuatanejo, Guerrero, México</p>
+      </div>
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="/#villas">The Luxury Villas</a>
+        <a href="/#experience">The Experience</a>
+        <a href="https://www.lacasaquecanta.com/" target="_blank" rel="noreferrer">La Casa Que Canta</a>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <a href="tel:+527555557000">+52 755 555 7000</a>
+        <a href="https://wa.me/525525641838" target="_blank" rel="noreferrer">WhatsApp +52 55 2564 1838</a>
+        <a href="mailto:sales.reservations@lacasaquecanta.com">sales.reservations@lacasaquecanta.com</a>
+      </div>
+      <div class="footer-column newsletter">
+        <h3>Private notes</h3>
+        <p>Luxury Villa stories and select invitations.</p>
+        <form>
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" type="email" placeholder="Your email address" />
+          <button aria-label="Subscribe">→</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> La Casa Que Canta</span>
+      <span>Zihuatanejo, Guerrero, México</span>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+<script>
+ document.getElementById('year').textContent = new Date().getFullYear();
+ const menuButton = document.querySelector('.menu-button');
+ const mobileNav = document.getElementById('mobileNav');
+ if (menuButton && mobileNav) menuButton.addEventListener('click', () => {
+   const open = mobileNav.classList.toggle('is-open');
+   menuButton.setAttribute('aria-expanded', String(open));
+ });
+</script></body></html>
