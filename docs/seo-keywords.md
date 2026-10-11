@@ -3,7 +3,7 @@
 User-provided keyword strategy for Luxury Villas by La Casa Que Canta.
 Keep this reference when editing site copy. Integrate phrases naturally in
 English and use natural Spanish equivalents on `/es/`. Preserve the Luxury
-Villa / Luxury Villas branding. The user requested the complete keyword list in the footer, in English and
+Villa / Luxury Villas branding. The user requested a curated keyword list in the footer, in English and
 Spanish, following the Jean Louis David reference. Do not add meta keywords. Only make property-specific claims supported by confirmed facts.
 
 ## Primary
@@ -80,6 +80,9 @@ remain to be verified; existing copy confirms four suites and eight guests.
 
 ## Footer presentation
 
-All 47 supplied expressions are displayed in the footer, separated by dots.
+20 selected expressions are displayed in each footer, separated by dots.
+The full 47-expression strategy above remains the reference. The selection
+prioritizes brand names, Playa La Ropa, rental intent and confirmed services.
+It is a relevance-based selection, not a measured keyword-difficulty ranking.
 English pages use the original list; `/es/` uses Spanish translations.
 The data lives in `src/data/footer-keywords.json`.
