@@ -142,8 +142,8 @@
       position: absolute; inset: 0; z-index: 3;
       background:
         linear-gradient(180deg, rgba(5,12,10,.46) 0, rgba(5,12,10,.28) 120px, transparent 280px),
-        linear-gradient(90deg, rgba(5,12,10,.30) 0%, rgba(5,12,10,.06) 55%, rgba(5,12,10,.08) 100%),
-        linear-gradient(0deg, rgba(5,10,8,.32), transparent 48%);
+        linear-gradient(90deg, rgba(5,12,10,.48) 0%, rgba(5,12,10,.18) 55%, rgba(5,12,10,.08) 100%),
+        linear-gradient(0deg, rgba(5,10,8,.58), transparent 65%);
     }
     .hero-content {
       position: relative; z-index: 5; height: 100%;
@@ -157,7 +157,8 @@
     .hero h1 { font-size: clamp(3.6rem, 8vw, 7.6rem); max-width: 1000px; text-shadow: 0 20px 45px rgba(0,0,0,.2); }
     .hero h1 em, .intro h2 em, .section-head h2 em, .immersive h2 em, .manifesto h2 em, .contact h2 em { font-style: italic; }
     .hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-top: 2.1rem; max-width: 1080px; flex-wrap: wrap; }
-    .hero-bottom p { font-size: .95rem; line-height: 1.6; font-weight: 300; opacity: .88; max-width: 30rem; }
+    .hero-bottom p { font-size: .95rem; line-height: 1.6; font-weight: 400; max-width: 30rem; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+    .hero .eyebrow { color: #fff; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
     .hero-ctas { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: .8rem; padding: .95rem 1.5rem; border-radius: 999px;
@@ -169,6 +170,11 @@
     .btn-solid:hover { background: rgba(243,239,230,.1); color: #fff; border-color: rgba(255,255,255,.6); }
     .btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; }
     .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    .hero-ctas .btn { font-weight: 600; }
+    .hero-ctas .btn-ghost { background: #18211e; border-color: rgba(255,255,255,.8); color: #fff; }
+    .hero-ctas .btn-ghost:hover, .hero-ctas .btn-ghost:focus-visible { background: #2c3c34; border-color: #fff; }
+    .hero-ctas .btn-solid:hover, .hero-ctas .btn-solid:focus-visible { background: #fff; color: var(--ink); }
+    .hero-ctas .btn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
     .coast-label {
       position: absolute; z-index: 5; right: 3vw; top: 50%; transform: rotate(90deg) translateX(50%); transform-origin: right top;
       font-size: .58rem; letter-spacing: .24em; opacity: .68;
@@ -369,12 +375,12 @@
     <section class="hero" id="hero">
       <div class="hero-shade"></div>
       <div class="hero-content">
-        <p class="eyebrow" data-reveal>Private villas · Zihuatanejo</p>
+        <p class="eyebrow" data-reveal>Luxury Villas - Zihuatanejo</p>
         <h1 data-reveal>Where the Pacific<br /><em>becomes yours.</em></h1>
         <div class="hero-bottom">
           <p data-reveal="right">Private oceanfront residences on Playa La Ropa, created for extraordinary escapes.</p>
           <div class="hero-ctas" data-reveal="right">
-            <a class="btn btn-solid" href="#villas">Discover the villas <span aria-hidden="true">→</span></a>
+            <a class="btn btn-solid" href="#villas">Discover Our Villas <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay</a>
           </div>
         </div>
