@@ -25,3 +25,8 @@ browser scripts. Images retain their original files and quality.
 The linked Vercel project uses the Astro configuration in `vercel.json` and
 serves `dist/`. Build with `vercel build --prod`, then deploy using
 `vercel deploy --prebuilt --prod`.
+
+## SEO content
+
+Use [the keyword reference](docs/seo-keywords.md) for all SEO copy changes.
+Run `npm run test:seo` after building to validate metadata and discovery files.
