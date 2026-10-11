@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GJHH1XBZJ"></script>
-  <script>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3GJHH1XBZJ"></script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
+  <script is:inline type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LodgingBusiness",
@@ -47,7 +47,7 @@
       ]
     }
   </script>
-  <style>
+  <style is:inline>
     :root {
       --ink: #151914;
       --cream: #f3efe6;
@@ -137,7 +137,7 @@
     .mobile-nav .book-link { margin-top: .6rem; font-family: var(--sans); font-size: .72rem; border-bottom: 0; }
 
     /* Hero */
-    .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("../assets/home-beach.webp") center/cover no-repeat; }
+    .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("/assets/home-beach.webp") center/cover no-repeat; }
     .hero-shade {
       position: absolute; inset: 0; z-index: 3;
       background:
@@ -273,7 +273,7 @@
 
     /* Final CTA */
     .contact { min-height: 78vh; position: relative; color: #fff; display: grid; place-items: center; text-align: center; overflow: hidden; }
-    .contact-bg { position: absolute; inset: 0; background: url("../assets/el-murmullo-closing.webp") center/cover no-repeat; transform: scale(1.06); }
+    .contact-bg { position: absolute; inset: 0; background: url("/assets/el-murmullo-closing.webp") center/cover no-repeat; transform: scale(1.06); }
     .contact-overlay { position: absolute; inset: 0; background: rgba(13,16,13,.5); }
     .contact-content { position: relative; z-index: 2; padding: 3rem 0; }
     .contact h2 { font-size: clamp(2.9rem, 7vw, 6.2rem); }
@@ -349,7 +349,7 @@
 
   <header class="site-header" id="header">
     <a class="brand" href="#top" aria-label="Luxury Villas por La Casa Que Canta, inicio">
-      <img class="brand-logo" src="../assets/logo.jpg" alt="La Casa Que Canta" />
+      <img class="brand-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
       <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
     </a>
     <nav class="main-nav" aria-label="Navegación principal">
@@ -405,7 +405,7 @@
 
     <section class="editorial warm">
       <div class="editorial-image" data-reveal="image">
-        <img src="../assets/el-murmullo-bay.webp" alt="La costa y la bahía alrededor de El Murmullo" loading="lazy" />
+        <img src="/assets/el-murmullo-bay.webp" alt="La costa y la bahía alrededor de El Murmullo" loading="lazy" />
         <span class="image-note">Bahía de Zihuatanejo · Costa del Pacífico</span>
       </div>
       <div class="editorial-quote" data-reveal="right">
@@ -427,7 +427,7 @@
       <div class="villa-grid">
         <article class="villa-card" data-reveal>
           <div class="villa-image">
-            <img src="../assets/el-ensueno-main.webp" alt="Luxury Villa El Ensueño en Zihuatanejo" />
+            <img src="/assets/el-ensueno-main.webp" alt="Luxury Villa El Ensueño en Zihuatanejo" />
             <div class="villa-overlay"></div>
             <span class="villa-number">01</span>
             <a class="villa-open" href="https://www.el-ensueno.com/" target="_blank" rel="noreferrer" aria-label="Visitar el sitio de El Ensueño">↗</a>
@@ -452,7 +452,7 @@
 
         <article class="villa-card" data-reveal>
           <div class="villa-image">
-            <img src="../assets/el-murmullo-main.webp" alt="Luxury Villa El Murmullo en Zihuatanejo" />
+            <img src="/assets/el-murmullo-main.webp" alt="Luxury Villa El Murmullo en Zihuatanejo" />
             <div class="villa-overlay"></div>
             <span class="villa-number">02</span>
             <a class="villa-open" href="https://www.el-murmullo.com/" target="_blank" rel="noreferrer" aria-label="Visitar el sitio de El Murmullo">↗</a>
@@ -478,7 +478,7 @@
     </section>
 
     <section class="immersive" id="experience">
-      <div class="immersive-bg" data-parallax style="background:url('../assets/experience-kiosk.webp') center/cover no-repeat;"></div>
+      <div class="immersive-bg" data-parallax style="background:url('/assets/experience-kiosk.webp') center/cover no-repeat;"></div>
       <div class="immersive-overlay"></div>
       <div class="immersive-copy" data-reveal>
         <p class="eyebrow">Una sola filosofía</p>
@@ -521,7 +521,7 @@
     <div class="footer-top">
       <div>
         <div class="footer-brand">
-          <img class="footer-logo" src="../assets/logo.jpg" alt="La Casa Que Canta" />
+          <img class="footer-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
           <span class="brand-copy">Luxury Villas<small>Zihuatanejo</small></span>
         </div>
         <p class="tagline">Luxury Villas privadas sobre Playa La Ropa<br />Zihuatanejo, Guerrero, México</p>
@@ -556,7 +556,7 @@
     </div>
   </footer>
 
-  <script>
+  <script is:inline>
     const header = document.getElementById('header');
     const menuButton = document.querySelector('.menu-button');
     const mobileNav = document.getElementById('mobileNav');

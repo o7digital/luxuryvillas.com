@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GJHH1XBZJ"></script>
-  <script>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3GJHH1XBZJ"></script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -11,43 +11,11 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Discover El Ensueño and El Murmullo, two exceptional private Luxury Villas by La Casa Que Canta in Zihuatanejo, Mexico." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Luxury Villas by La Casa Que Canta | Zihuatanejo" />
-  <meta property="og:description" content="Discover El Ensueño and El Murmullo, two exceptional private Luxury Villas by La Casa Que Canta in Zihuatanejo, Mexico." />
-  <meta property="og:url" content="https://github.com/o7digital/luxuryvillas.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Luxury Villas by La Casa Que Canta | Zihuatanejo" />
-  <meta name="twitter:description" content="Discover El Ensueño and El Murmullo, two exceptional private Luxury Villas by La Casa Que Canta in Zihuatanejo, Mexico." />
-  <title>Luxury Villas by La Casa Que Canta | Zihuatanejo</title>
-  <link rel="alternate" hreflang="en" href="/" />
-  <link rel="alternate" hreflang="es" href="/es/" />
+  <title>Privacy Policy | Luxury Villas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LodgingBusiness",
-      "name": "Luxury Villas by La Casa Que Canta",
-      "description": "Discover El Ensueño and El Murmullo, two exceptional private Luxury Villas by La Casa Que Canta in Zihuatanejo, Mexico.",
-      "url": "https://github.com/o7digital/luxuryvillas.com",
-      "telephone": "+52 755 555 7000",
-      "email": "sales.reservations@lacasaquecanta.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Zihuatanejo",
-        "addressRegion": "Guerrero",
-        "addressCountry": "MX"
-      },
-      "sameAs": [
-        "https://www.lacasaquecanta.com/",
-        "https://www.el-ensueno.com/",
-        "https://www.el-murmullo.com/"
-      ]
-    }
-  </script>
-  <style>
+  <style is:inline>
     :root {
       --ink: #151914;
       --cream: #f3efe6;
@@ -137,7 +105,7 @@
     .mobile-nav .book-link { margin-top: .6rem; font-family: var(--sans); font-size: .72rem; border-bottom: 0; }
 
     /* Hero */
-    .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("assets/home-beach.webp") center/cover no-repeat; }
+    .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("/assets/home-beach.webp") center/cover no-repeat; }
     .hero-shade {
       position: absolute; inset: 0; z-index: 3;
       background:
@@ -273,7 +241,7 @@
 
     /* Final CTA */
     .contact { min-height: 78vh; position: relative; color: #fff; display: grid; place-items: center; text-align: center; overflow: hidden; }
-    .contact-bg { position: absolute; inset: 0; background: url("assets/el-murmullo-closing.webp") center/cover no-repeat; transform: scale(1.06); }
+    .contact-bg { position: absolute; inset: 0; background: url("/assets/el-murmullo-closing.webp") center/cover no-repeat; transform: scale(1.06); }
     .contact-overlay { position: absolute; inset: 0; background: rgba(13,16,13,.5); }
     .contact-content { position: relative; z-index: 2; padding: 3rem 0; }
     .contact h2 { font-size: clamp(2.9rem, 7vw, 6.2rem); }
@@ -343,19 +311,55 @@
       [data-reveal] { opacity: 1; transform: none; }
     }
   </style>
+  <meta name="description" content="Privacy Policy: collection, use and protection of personal data, and your privacy rights." />
+  <style is:inline>
+    body { background: rgb(233, 232, 229); }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('/assets/privacy-logo.png') no-repeat center 30%;
+      background-size: clamp(360px, 120vw, 1400px);
+      opacity: .20;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .privacy-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 150px 24px 70px; }
+    .site-footer { position: relative; z-index: 1; }
+    @media (min-width: 768px) {
+      body::before { background-position: center 24%; background-size: clamp(420px, 83vw, 1660px); opacity: .22; }
+    }
+    .privacy-content h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 2rem; }
+    .privacy-content h3 { font-size: 1.3rem; margin: 2rem 0 1rem; }
+    .privacy-content p, .privacy-content li { line-height: 1.8; }
+    .privacy-content p { margin: 1rem 0; }
+    .privacy-content ul { padding-left: 1.5rem; }
+    .privacy-content a { text-decoration: underline; overflow-wrap: anywhere; }
+    .privacy-content hr { margin: 2rem 0; border: 0; border-top: 1px solid #d5d0c5; }
+    .site-header {
+      color: #fff;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, .35) 65%, transparent 100%);
+      padding-bottom: 3rem;
+    }
+    .site-header.is-scrolled {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, .35) 65%, transparent 100%);
+      backdrop-filter: none;
+      border-color: transparent;
+      padding-bottom: 2rem;
+    }
+  </style>
 </head>
-<body>
-  <div class="grain" aria-hidden="true"></div>
-
+<body id="top">
   <header class="site-header" id="header">
-    <a class="brand" href="#top" aria-label="Luxury Villas by La Casa Que Canta home">
-      <img class="brand-logo" src="assets/logo.jpg" alt="La Casa Que Canta" />
+    <a class="brand" href="/#top" aria-label="Luxury Villas by La Casa Que Canta home">
+      <img class="brand-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
       <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#villas">The Luxury Villas</a>
-      <a href="#experience">The Experience</a>
-      <a href="#story">Our Story</a>
+      <a href="/#villas">The Luxury Villas</a>
+      <a href="/#experience">The Experience</a>
+      <a href="/#story">Our Story</a>
     </nav>
     <div class="header-actions">
       <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay <span aria-hidden="true">↗</span></a>
@@ -365,171 +369,27 @@
   </header>
 
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <a href="#villas">The Luxury Villas</a>
-    <a href="#experience">The Experience</a>
-    <a href="#story">Our Story</a>
+    <a href="/#villas">The Luxury Villas</a>
+    <a href="/#experience">The Experience</a>
+    <a href="/#story">Our Story</a>
     <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay <span aria-hidden="true">↗</span></a>
   </nav>
 
-  <main id="top">
-    <section class="hero" id="hero">
-      <div class="hero-shade"></div>
-      <div class="hero-content">
-        <p class="eyebrow" data-reveal>Luxury Villas - Zihuatanejo</p>
-        <h1 data-reveal>Where the Pacific<br /><em>becomes yours.</em></h1>
-        <div class="hero-bottom">
-          <p data-reveal="right">Private oceanfront residences on Playa La Ropa, created for extraordinary escapes.</p>
-          <div class="hero-ctas" data-reveal="right">
-            <a class="btn btn-solid" href="#villas">Discover Our Luxury Villas <span aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay</a>
-          </div>
-        </div>
-      </div>
-      <div class="coast-label">Zihuatanejo · 17.6417° N 101.5517° W</div>
-      <svg class="hero-curve" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,72 C260,135 420,5 705,52 C960,94 1160,130 1440,45 L1440,120 L0,120 Z" fill="#f3efe6"></path>
-      </svg>
-    </section>
-
-    <section class="intro warm" id="story">
-      <div class="intro-index" aria-hidden="true">01</div>
-      <div data-reveal>
-        <p class="eyebrow dark">A private side of La Casa Que Canta</p>
-        <h2>Two extraordinary Luxury Villas.<br /><em>One unforgettable coast.</em></h2>
-      </div>
-      <div class="intro-text" data-reveal="right">
-        <p>Set on the edges of Playa La Ropa, each residence offers its own rhythm — one steps directly onto the sand, the other rises above the bay with a sense of quiet seclusion.</p>
-        <a href="#villas" class="text-link">Meet the Luxury Villas <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-
-    <section class="editorial warm">
-      <div class="editorial-image" data-reveal="image">
-        <img src="assets/el-murmullo-bay.webp" alt="The coastline and bay around El Murmullo" loading="lazy" />
-        <span class="image-note">Zihuatanejo Bay · Pacific coast</span>
-      </div>
-      <div class="editorial-quote" data-reveal="right">
-        <span class="mini-line" aria-hidden="true"></span>
-        <blockquote>“Luxury here is not a service list. It is the quiet feeling that the whole coast has been reserved for you.”</blockquote>
-        <p>— Zihuatanejo, Guerrero</p>
-      </div>
-    </section>
-
-    <section class="villas" id="villas">
-      <div class="section-head" data-reveal>
-        <div>
-          <p class="eyebrow">Two private worlds</p>
-          <h2>Choose your<br /><em>point of view.</em></h2>
-        </div>
-        <p>Each Luxury Villa has its own character, but both share the same rare privilege: uninterrupted ocean, personal service and absolute privacy.</p>
-      </div>
-
-      <div class="villa-grid">
-        <article class="villa-card" data-reveal>
-          <div class="villa-image">
-            <img src="assets/el-ensueno-main.webp" alt="El Ensueño Luxury Villa in Zihuatanejo" />
-            <div class="villa-overlay"></div>
-            <span class="villa-number">01</span>
-            <a class="villa-open" href="https://www.el-ensueno.com/" target="_blank" rel="noreferrer" aria-label="Visit El Ensueño website">↗</a>
-          </div>
-          <div class="villa-meta">
-            <p class="eyebrow">On La Ropa Beach</p>
-            <h3>El Ensueño</h3>
-            <p class="desc">A private sanctuary above the Pacific — an intimate four-suite residence where contemporary comfort opens directly onto the sand.</p>
-            <ul class="villa-tags">
-              <li>4 private suites</li>
-              <li>Up to 8 guests</li>
-              <li>Oceanfront setting</li>
-            </ul>
-            <div class="villa-features">
-              <div><span>01</span><p>Private chef &amp; butler</p></div>
-              <div><span>02</span><p>Infinity pool &amp; terraces</p></div>
-              <div><span>03</span><p>Beachside lounge</p></div>
-            </div>
-            <a class="text-link" href="https://www.el-ensueno.com/" target="_blank" rel="noreferrer">Explore El Ensueño <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
-
-        <article class="villa-card" data-reveal>
-          <div class="villa-image">
-            <img src="assets/el-murmullo-main.webp" alt="El Murmullo Luxury Villa in Zihuatanejo" />
-            <div class="villa-overlay"></div>
-            <span class="villa-number">02</span>
-            <a class="villa-open" href="https://www.el-murmullo.com/" target="_blank" rel="noreferrer" aria-label="Visit El Murmullo website">↗</a>
-          </div>
-          <div class="villa-meta">
-            <p class="eyebrow">Above the bay</p>
-            <h3>El Murmullo</h3>
-            <p class="desc">A sanctuary that whispers between jungle and sea — private terraces and panoramic views shaped for slow mornings.</p>
-            <ul class="villa-tags">
-              <li>4 private suites</li>
-              <li>Up to 8 guests</li>
-              <li>Panoramic bay views</li>
-            </ul>
-            <div class="villa-features">
-              <div><span>01</span><p>Personalized concierge</p></div>
-              <div><span>02</span><p>Private pools &amp; terraces</p></div>
-              <div><span>03</span><p>Garden-to-sea calm</p></div>
-            </div>
-            <a class="text-link" href="https://www.el-murmullo.com/" target="_blank" rel="noreferrer">Explore El Murmullo <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="immersive" id="experience">
-      <div class="immersive-bg" data-parallax style="background:url('assets/experience-kiosk.webp') center/cover no-repeat;"></div>
-      <div class="immersive-overlay"></div>
-      <div class="immersive-copy" data-reveal>
-        <p class="eyebrow">One philosophy</p>
-        <h2>Everything taken care of.<br /><em>Nothing to think about.</em></h2>
-        <p class="lead-copy">Our Luxury Villa team takes care of every detail with warmth, discretion and the intuitive hospitality that defines La Casa Que Canta.</p>
-      </div>
-      <div class="experience-rail" data-reveal>
-        <div><span>01</span><strong>Private chef</strong><small>Menus built around you</small></div>
-        <div><span>02</span><strong>Concierge</strong><small>Personal, discreet, intuitive</small></div>
-        <div><span>03</span><strong>Ocean experiences</strong><small>Sailing · snorkeling · sunset</small></div>
-        <div><span>04</span><strong>Wellness</strong><small>Massage · yoga · stillness</small></div>
-      </div>
-    </section>
-
-    <section class="manifesto warm">
-      <p class="manifesto-top" data-reveal>ZIHUATANEJO · MEXICO</p>
-      <h2 data-reveal>A slower rhythm.<br /><em>A warmer kind of luxury.</em></h2>
-      <div class="manifesto-grid" data-reveal>
-        <p>We believe the rarest luxury is a place that feels entirely your own — shaped by exceptional architecture, intuitive service and a deep sense of place.</p>
-        <div class="seal"><span>PRIVATE<br />PACIFIC<br />LIVING</span></div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="contact-bg" data-parallax></div>
-      <div class="contact-overlay"></div>
-      <div class="contact-content" data-reveal>
-        <p class="eyebrow">Your private escape awaits</p>
-        <h2>Zihuatanejo is<br /><em>waiting.</em></h2>
-        <p class="lead-copy">Our dedicated Luxury Villa specialists are here to help you choose the right home on the Pacific coast.</p>
-        <div class="contact-ctas">
-          <a class="btn btn-solid" href="mailto:sales.reservations@lacasaquecanta.com">Plan your stay <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost" href="https://wa.me/525525641838" target="_blank" rel="noreferrer">Contact concierge</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
+<main class="privacy-content"><h1>Privacy Policy</h1><section> <p> <strong>In “La Casa Que Canta”</strong> (hereinafter <strong>CASACANTA ZIHUA SA DE CV</strong>), we are aware of the importance of maintaining the confidentiality of personal and sensitive information of our guests and clients. We are committed to protecting your information and privacy in accordance with:
+</p> <ul> <li>The <strong>Federal Law on the Protection of Personal Data Held by Private Parties</strong> (Mexico)</li> <li>The <strong>General Data Protection Regulation (GDPR)</strong> of the European Union</li> <li>The <strong>California Consumer Privacy Act (CCPA)</strong> in the United States</li> </ul> <p>Below we provide you with important information regarding the collection, use, and protection of your personal data.</p> <hr> <h3>1. Data Collection</h3> <p>We may collect personal information at any of the contact and interaction points we have with our clients, including:</p> <ul> <li>Our website and reservation system</li> <li>Information sent to or shared through our social media platforms</li> <li>Our internal systems and during your visit to the hotel</li> </ul> <p>This information may include:</p> <ul> <li>Contact details (name, phone number, email, address)</li> <li>Information related to your booking, stay, or visit</li> <li>Payment data (credit card, TAX ID, business activity)</li> <li>Personal characteristics, nationality, passport or official ID number, and place and date of issue</li> <li>Travel history and preferences during your stay</li> <li>Data on travel companions (name, preferences)</li> <li>Medical information voluntarily provided to improve your experience</li> <li>Marketing and communication preferences</li> <li>Feedback and comments about our services</li> </ul> <hr> <h3>2. Use of Personal and Sensitive Information</h3> <p>CASACANTA ZIHUA SA DE CV uses this information to provide the services you requested or those related to a reservation, transaction, or program. We may also use your data to:</p> <ul> <li>Improve our services and offer the level of hospitality you expect</li> <li>Ensure that our website, products, and services meet your interests</li> <li>Process payments, refunds, and other service-related requests</li> <li>Send communications regarding services, promotions, and special events (with your prior consent)</li> </ul> <p>The legal basis for processing your data includes:</p> <ul> <li>Your consent</li> <li>The execution of a contract (your reservation)</li> <li>Our legitimate interest (to improve services)</li> </ul> <p>All in accordance with applicable Mexican law, the GDPR, and the CCPA.</p> <hr> <h3>3. Data Transfers</h3> <p>We may transfer your personal data to:</p> <ul> <li>IT service providers operating our technological infrastructure (servers, reservation systems, etc.)</li> <li>Medical providers, in case of emergency</li> <li>Competent authorities, when required by law</li> </ul> <p>If you do not object, we will assume that you authorize these transfers.</p> <p><strong>Note for EU residents:</strong> We only transfer personal data outside the European Economic Area (EEA) to countries that ensure an adequate level of protection, or under Standard Contractual Clauses approved by the European Commission.</p> <p><strong>Note for California residents (USA):</strong> We do not sell your personal information as defined under the CCPA.</p> <hr> <h3>4. Security Measures</h3> <p>We have implemented physical, technical, and administrative safeguards to protect your personal data from unauthorized access, loss, alteration, or misuse. These include:</p> <ul> <li>SSL encryption on our website and reservation systems</li> <li>Internal access controls and staff training</li> <li>Secure backups and system monitoring</li> </ul> <hr> <h3>5. ARCO Rights and Other Applicable Rights</h3> <p>In accordance with Mexican law, you have the right to Access, Rectify, Cancel, or Oppose the processing of your personal data (ARCO rights).</p> <p>Additionally, under GDPR and CCPA, you may also exercise the following rights:</p> <ul> <li>Data portability (EU)</li> <li>Restriction of processing</li> <li>Right to erasure (“right to be forgotten”)</li> <li>Right to opt out of marketing or data sharing (California)</li> </ul> <p>You may submit your request to exercise any of these rights by writing to our Reservations and Sales Department: <a href="mailto:sales.reservations@lacasaquecanta.com">sales.reservations@lacasaquecanta.com</a> · <a href="tel:+527555557000">+52 (755) 555 7000</a></p> <p><strong>Response Time:</strong> Within 20 business days from the date of receipt of your request, if it is deemed admissible, the corresponding action will be taken within 15 business days following the date on which the response is communicated.</p> <p>We will respond through the contact method you indicate in your request and within the timeframe established by applicable law.</p> <hr> <h3>6. Data Retention</h3> <p>We retain your personal data only for as long as necessary to fulfill the purposes described above, or as required by applicable tax or legal regulations.</p> <hr> <h3>7. Modifications to this Privacy Notice</h3> <p>This privacy notice may be updated at any time. Changes will be published on our website: <a href="https://www.lascasasboutiquehotel.com/">www.lascasasboutiquehotel.com</a> · Last update: August 2025</p> <hr> <h3>8. Identity and Address of the Data Controller</h3> <p><strong>CASACANTA ZIHUA SA DE CV</strong></p> <ul> <li>Fiscal Address: Montes Urales 754, Floor 5, Lomas de Chapultepec I Sección, 11000 CDMX, Mexico</li> <li>Hotel Address: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., Mexico</li> </ul> <p>© All rights reserved Casacanta Zihuat</p> </section></main>
   <footer class="site-footer">
     <div class="footer-top">
       <div>
         <div class="footer-brand">
-          <img class="footer-logo" src="assets/logo.jpg" alt="La Casa Que Canta" />
+          <img class="footer-logo" src="/assets/logo.jpg" alt="La Casa Que Canta" />
           <span class="brand-copy">Luxury Villas<small>Zihuatanejo</small></span>
         </div>
         <p class="tagline">Private Luxury Villas above Playa La Ropa<br />Zihuatanejo, Guerrero, México</p>
       </div>
       <div class="footer-column">
         <h3>Explore</h3>
-        <a href="#villas">The Luxury Villas</a>
-        <a href="#experience">The Experience</a>
+        <a href="/#villas">The Luxury Villas</a>
+        <a href="/#experience">The Experience</a>
         <a href="https://www.lacasaquecanta.com/" target="_blank" rel="noreferrer">La Casa Que Canta</a>
       </div>
       <div class="footer-column">
@@ -556,77 +416,18 @@
     </div>
   </footer>
 
-  <script>
-    const header = document.getElementById('header');
-    const menuButton = document.querySelector('.menu-button');
-    const mobileNav = document.getElementById('mobileNav');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 760px)').matches;
-
-    const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-
-    if (menuButton && mobileNav) {
-      menuButton.addEventListener('click', () => {
-        const isOpen = mobileNav.classList.toggle('is-open');
-        menuButton.classList.toggle('is-open', isOpen);
-        menuButton.setAttribute('aria-expanded', String(isOpen));
-        menuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-      });
-      mobileNav.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileNav.classList.remove('is-open');
-          menuButton.classList.remove('is-open');
-          menuButton.setAttribute('aria-expanded', 'false');
-          menuButton.setAttribute('aria-label', 'Open menu');
-        });
-      });
-    }
-
-    const revealElements = document.querySelectorAll('[data-reveal]');
-    if (reducedMotion) {
-      revealElements.forEach((el) => el.classList.add('is-visible'));
-    } else if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
-      revealElements.forEach((el) => observer.observe(el));
-    } else {
-      revealElements.forEach((el) => el.classList.add('is-visible'));
-    }
-
-    if (!reducedMotion && !isMobile) {
-      const parallaxEls = document.querySelectorAll('[data-parallax]');
-      let ticking = false;
-      const updateParallax = () => {
-        parallaxEls.forEach((el) => {
-          const rect = (el.parentElement || el).getBoundingClientRect();
-          const shift = Math.max(-50, Math.min(50, -rect.top * 0.06));
-          el.style.transform = `scale(1.06) translate3d(0, ${shift}px, 0)`;
-        });
-        ticking = false;
-      };
-      const onScroll = () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      updateParallax();
-    }
-
-    const newsletterForm = document.querySelector('.newsletter form');
-    if (newsletterForm) newsletterForm.addEventListener('submit', (e) => e.preventDefault());
-
-    const yearNode = document.getElementById('year');
-    if (yearNode) yearNode.textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+<script is:inline>
+ document.getElementById('year').textContent = new Date().getFullYear();
+ const header = document.getElementById('header');
+ const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 50);
+ window.addEventListener('scroll', updateHeader, { passive: true });
+ updateHeader();
+ const menuButton = document.querySelector('.menu-button');
+ const mobileNav = document.getElementById('mobileNav');
+ if (menuButton && mobileNav) menuButton.addEventListener('click', () => {
+   const open = mobileNav.classList.toggle('is-open');
+   menuButton.setAttribute('aria-expanded', String(open));
+   menuButton.classList.toggle('is-open', open);
+   menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+ });
+</script></body></html>
