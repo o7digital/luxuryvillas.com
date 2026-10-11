@@ -313,7 +313,23 @@
   </style>
   <meta name="description" content="Privacy Policy: collection, use and protection of personal data, and your privacy rights." />
   <style>
-    .privacy-content { max-width: 900px; margin: 0 auto; padding: 150px 24px 70px; }
+    body { background: rgb(233, 232, 229); }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('/assets/privacy-logo.png') no-repeat center 30%;
+      background-size: clamp(360px, 120vw, 1400px);
+      opacity: .20;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .privacy-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 150px 24px 70px; }
+    .site-footer { position: relative; z-index: 1; }
+    @media (min-width: 768px) {
+      body::before { background-position: center 24%; background-size: clamp(420px, 83vw, 1660px); opacity: .22; }
+    }
     .privacy-content h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 2rem; }
     .privacy-content h3 { font-size: 1.3rem; margin: 2rem 0 1rem; }
     .privacy-content p, .privacy-content li { line-height: 1.8; }
@@ -321,7 +337,17 @@
     .privacy-content ul { padding-left: 1.5rem; }
     .privacy-content a { text-decoration: underline; overflow-wrap: anywhere; }
     .privacy-content hr { margin: 2rem 0; border: 0; border-top: 1px solid #d5d0c5; }
-    .site-header { background: var(--cream); color: var(--ink); }
+    .site-header {
+      color: #fff;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, .35) 65%, transparent 100%);
+      padding-bottom: 3rem;
+    }
+    .site-header.is-scrolled {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, .35) 65%, transparent 100%);
+      backdrop-filter: none;
+      border-color: transparent;
+      padding-bottom: 2rem;
+    }
   </style>
 </head>
 <body id="top">
@@ -392,10 +418,16 @@
 
 <script>
  document.getElementById('year').textContent = new Date().getFullYear();
+ const header = document.getElementById('header');
+ const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 50);
+ window.addEventListener('scroll', updateHeader, { passive: true });
+ updateHeader();
  const menuButton = document.querySelector('.menu-button');
  const mobileNav = document.getElementById('mobileNav');
  if (menuButton && mobileNav) menuButton.addEventListener('click', () => {
    const open = mobileNav.classList.toggle('is-open');
    menuButton.setAttribute('aria-expanded', String(open));
+   menuButton.classList.toggle('is-open', open);
+   menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
  });
 </script></body></html>
