@@ -10,25 +10,25 @@ Spanish, following the Jean Louis David reference. Do not add meta keywords. Onl
 
 - luxury villas Zihuatanejo
 - luxury villa rental Zihuatanejo
-- private villa Zihuatanejo
-- Zihuatanejo villa rentals
+- private luxury villa Zihuatanejo
+- Zihuatanejo luxury villa rentals
 - luxury vacation rental Zihuatanejo
 - luxury villas Playa La Ropa
-- Playa La Ropa villa rental
-- beachfront villa Zihuatanejo
-- oceanfront villa Zihuatanejo
+- Playa La Ropa luxury villa rental
+- beachfront luxury villa Zihuatanejo
+- oceanfront luxury villa Zihuatanejo
 - private luxury villa Zihuatanejo Mexico
 
 ## Secondary
 
-- private villa Playa La Ropa
-- beachfront villa Playa La Ropa
-- oceanfront villa Playa La Ropa
+- private luxury villa Playa La Ropa
+- beachfront luxury villa Playa La Ropa
+- oceanfront luxury villa Playa La Ropa
 - luxury villa Ixtapa Zihuatanejo
-- Ixtapa Zihuatanejo villa rental
-- private villa Ixtapa Zihuatanejo
-- luxury beach villa Zihuatanejo Mexico
-- exclusive villa rental Zihuatanejo
+- Ixtapa Zihuatanejo luxury villa rental
+- private luxury villa Ixtapa Zihuatanejo
+- beachfront luxury villa Zihuatanejo Mexico
+- exclusive luxury villa rental Zihuatanejo
 - luxury accommodation Playa La Ropa
 - private oceanfront residence Zihuatanejo
 - luxury villa Guerrero Mexico
@@ -36,20 +36,20 @@ Spanish, following the Jean Louis David reference. Do not add meta keywords. Onl
 
 ## Long-tail
 
-- Zihuatanejo villa with private chef
-- Zihuatanejo villa with butler
-- Zihuatanejo villa with concierge
-- Zihuatanejo villa with infinity pool
-- private villa with pool Zihuatanejo
+- Zihuatanejo luxury villa with private chef
+- Zihuatanejo luxury villa with butler
+- Zihuatanejo luxury villa with concierge
+- Zihuatanejo luxury villa with infinity pool
+- private luxury villa with pool Zihuatanejo
 - 4 bedroom luxury villa Zihuatanejo
-- villa for 8 guests Zihuatanejo
-- private beachfront villa Zihuatanejo Mexico
+- luxury villa for 8 guests Zihuatanejo
+- private beachfront luxury villa Zihuatanejo Mexico
 - luxury villa with private chef Zihuatanejo
 - luxury villa for families Zihuatanejo
 - private luxury vacation home Zihuatanejo
-- ocean view villa rental Zihuatanejo
+- ocean view luxury villa rental Zihuatanejo
 - luxury villa near Playa La Ropa
-- private vacation villa Playa La Ropa
+- private vacation luxury villa Playa La Ropa
 - luxury beachfront accommodation Zihuatanejo
 
 ## Brand
@@ -57,13 +57,13 @@ Spanish, following the Jean Louis David reference. Do not add meta keywords. Onl
 - El Ensueño Zihuatanejo
 - El Ensueño Playa La Ropa
 - El Ensueño luxury villa
-- El Ensueño villa Mexico
+- El Ensueño luxury villa Mexico
 - El Murmullo Zihuatanejo
 - El Murmullo Playa La Ropa
 - El Murmullo luxury villa
-- El Murmullo villa Mexico
-- La Casa Que Canta villas
-- La Casa Que Canta private villas
+- El Murmullo luxury villa Mexico
+- La Casa Que Canta luxury villas
+- La Casa Que Canta private luxury villas
 
 ## Current homepage placement
 
@@ -84,5 +84,7 @@ remain to be verified; existing copy confirms four suites and eight guests.
 The full 47-expression strategy above remains the reference. The selection
 prioritizes brand names, Playa La Ropa, rental intent and confirmed services.
 It is a relevance-based selection, not a measured keyword-difficulty ranking.
-English pages use the original list; `/es/` uses Spanish translations.
+Every English villa keyword must include “luxury villa” or “luxury villas”;
+Spanish equivalents must include “villa de lujo” or “villas de lujo”.
+English pages use the corrected list; `/es/` uses Spanish translations.
 The data lives in `src/data/footer-keywords.json`.
