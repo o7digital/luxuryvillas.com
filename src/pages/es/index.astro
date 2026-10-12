@@ -1,6 +1,6 @@
 ---
 import ContactForm from '../../components/ContactForm.astro';
-import StayGuide from "../../components/StayGuide.astro";
+import FooterKeywords from "../../components/FooterKeywords.astro";
 import Seo from "../../components/Seo.astro";
 ---
 <!doctype html>
@@ -310,7 +310,6 @@ import Seo from "../../components/Seo.astro";
     [data-reveal="image"] { transform: none; }
     [data-reveal].is-visible { animation: reveal-in .7s ease both; }
     @keyframes reveal-in { from { transform: translateY(16px); } to { transform: none; } }
-    .footer-summary { color: #b7b9b2; font-size: .85rem; line-height: 1.7; margin: 2rem 0 0; max-width: 65rem; }
 
     @media (max-width: 1100px) {
       .intro { grid-template-columns: 1fr 1fr; }
@@ -396,7 +395,7 @@ import Seo from "../../components/Seo.astro";
       <div class="hero-shade"></div>
       <div class="hero-content">
         <p class="eyebrow" data-reveal>Luxury Villas - Zihuatanejo</p>
-        <h1 data-reveal>Villas de lujo<br /><em>en Zihuatanejo.</em></h1>
+        <h1 data-reveal>Donde el Pacífico<br /><em>se vuelve tuyo.</em></h1>
         <div class="hero-bottom">
           <p data-reveal="right">Residencias privadas frente al mar en Playa La Ropa, creadas para escapadas extraordinarias.</p>
           <div class="hero-ctas" data-reveal="right">
@@ -522,8 +521,6 @@ import Seo from "../../components/Seo.astro";
       </div>
     </section>
 
-    <StayGuide lang="es" />
-
     <ContactForm lang="es" />
 
     <section class="contact" id="plan-your-stay">
@@ -578,7 +575,7 @@ import Seo from "../../components/Seo.astro";
       <a href="/privacy-policy/">Política de privacidad</a>
       <a href="#top">Volver arriba ↑</a>
     </div>
-    <p class="footer-summary">Villas privadas en Playa La Ropa, Zihuatanejo, de La Casa Que Canta. Descubre El Ensueño frente a la playa y El Murmullo con vistas a la bahía.</p>
+    <FooterKeywords lang="es" />
   </footer>
 
   <script is:inline>

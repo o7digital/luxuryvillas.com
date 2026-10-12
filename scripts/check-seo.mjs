@@ -15,9 +15,8 @@ for (const route of ['/', '/es/', '/privacy-policy/']) {
       assert.ok(html.includes(`hreflang="${language}" href="${site}${path}"`));
     }
     assert.equal([...html.matchAll(/<h1(?:\s|>)/g)].length, 1);
-    assert.ok(html.includes(route === '/' ? 'in Zihuatanejo.' : 'en Zihuatanejo.'));
-    assert.ok(html.includes('id="stay-guide-title"'));
-    assert.ok(!html.includes('footer-keywords'));
+    assert.ok(!html.includes('id="stay-guide-title"'));
+    assert.ok(html.includes('footer-keywords'));
     assert.ok(html.includes('fetchpriority="high"'));
     assert.ok(html.includes('srcset='));
     assert.ok(!html.includes('[data-reveal] { opacity: 0'));
