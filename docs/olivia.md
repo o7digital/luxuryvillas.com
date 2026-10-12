@@ -33,7 +33,9 @@ exact route for this gateway; V3 remains private and other sites are unchanged.
 
 Validation: `npm run build`, `npm run test:seo`, browser checks in both languages
 and at mobile/desktop sizes, and a real preview → gateway → V3 exchange.
-Deploy preview with `vercel build` then `vercel deploy --prebuilt`.
+Deploy previews with `vercel deploy` so Vercel builds the server function on
+Linux. Avoid uploading a macOS prebuilt function: native build dependencies
+can otherwise fail when the function starts on Linux.
 Production needs the same private environment variable before deployment.
 Rollback by removing `<OliviaAI>` from the three pages and redeploying; the
 new gateway can then be stopped independently.

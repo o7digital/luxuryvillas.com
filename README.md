@@ -23,8 +23,8 @@ browser scripts. Images retain their original files and quality.
 ## Deployment
 
 The linked Vercel project uses the Astro configuration in `vercel.json` and
-uses the Vercel adapter to serve prerendered pages and the chat API. Build with `vercel build --prod`, then deploy using
-`vercel deploy --prebuilt --prod`.
+uses the Vercel adapter to serve prerendered pages and the chat API. Deploy previews with `vercel deploy` and production with `vercel deploy --prod`
+so the server function is built on Vercel’s Linux environment.
 
 ## Olivia AI
 
