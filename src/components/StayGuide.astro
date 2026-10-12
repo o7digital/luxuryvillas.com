@@ -1,0 +1,41 @@
+---
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+const copy = lang === 'es' ? {
+  title: 'Planea tu estancia en Playa La Ropa',
+  intro: 'Dos villas privadas, dos formas de disfrutar Zihuatanejo. Compara su ubicación y sus servicios antes de consultar disponibilidad.',
+  items: [
+    ['¿Qué villa elegir?', 'El Ensueño está frente a la playa de La Ropa y ofrece chef privado, mayordomo y piscina infinita. El Murmullo se encuentra sobre la bahía, con vistas al mar, piscinas privadas y servicio personalizado de concierge.'],
+    ['¿Cuántas personas pueden alojarse?', 'Cada villa dispone de cuatro suites privadas y recibe hasta ocho huéspedes. Contacta al equipo de reservas para conocer la distribución y elegir la villa que mejor se adapte a tu grupo.'],
+    ['¿Cómo consultar disponibilidad y servicios?', 'Indica tus fechas, el número de huéspedes y la villa que prefieres mediante el formulario. El equipo puede confirmar disponibilidad, tarifas, servicios incluidos y opciones para tu estancia.'],
+    ['¿Cómo organizar la llegada?', 'Las villas se encuentran en la zona de Playa La Ropa, Zihuatanejo, Guerrero, México. Consulta al equipo sobre indicaciones de llegada y opciones de traslado para tus fechas.']
+  ]
+} : {
+  title: 'Plan your stay on Playa La Ropa',
+  intro: 'Two private villas, two ways to experience Zihuatanejo. Compare their settings and services before enquiring about availability.',
+  items: [
+    ['Which villa should you choose?', 'El Ensueño is on La Ropa Beach, with a private chef, butler and infinity pool. El Murmullo sits above the bay, offering ocean views, private pools and personalized concierge service.'],
+    ['How many guests can stay?', 'Each villa has four private suites and welcomes up to eight guests. Contact the reservations team to discuss the suite arrangements and find the right villa for your group.'],
+    ['How do you check availability and services?', 'Share your dates, number of guests and preferred villa through the enquiry form. The team can confirm availability, rates, included services and options for your stay.'],
+    ['How do you plan your arrival?', 'The villas are in the Playa La Ropa area of Zihuatanejo, Guerrero, Mexico. Ask the team for arrival directions and transfer options for your dates.']
+  ]
+};
+---
+<section class="stay-guide" aria-labelledby="stay-guide-title">
+  <h2 id="stay-guide-title">{copy.title}</h2>
+  <p class="intro">{copy.intro}</p>
+  <div class="questions">
+    {copy.items.map(([question, answer]) => <article><h3>{question}</h3><p>{answer}</p></article>)}
+  </div>
+  <a href="#contact">{lang === 'es' ? 'Consultar disponibilidad →' : 'Enquire about availability →'}</a>
+</section>
+<style>
+  .stay-guide { background: #f3efe6; color: #151914; padding: 5rem 7vw; }
+  h2 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; line-height: 1.1; margin: 0 0 1.5rem; }
+  .intro { max-width: 48rem; }
+  p { line-height: 1.8; }
+  .questions { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 4rem; margin: 2rem 0; }
+  h3 { font-size: 1.1rem; font-weight: 500; }
+  a { color: inherit; text-underline-offset: .3rem; }
+  @media (max-width: 760px) { .stay-guide { padding: 3.5rem 1.3rem; } .questions { grid-template-columns: 1fr; gap: 1rem; } }
+</style>

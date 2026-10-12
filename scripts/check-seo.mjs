@@ -14,6 +14,13 @@ for (const route of ['/', '/es/', '/privacy-policy/']) {
     for (const [language, path] of [['en', '/'], ['es', '/es/'], ['x-default', '/']]) {
       assert.ok(html.includes(`hreflang="${language}" href="${site}${path}"`));
     }
+    assert.equal([...html.matchAll(/<h1(?:\s|>)/g)].length, 1);
+    assert.ok(html.includes(route === '/' ? 'in Zihuatanejo.' : 'en Zihuatanejo.'));
+    assert.ok(html.includes('id="stay-guide-title"'));
+    assert.ok(!html.includes('footer-keywords'));
+    assert.ok(html.includes('fetchpriority="high"'));
+    assert.ok(html.includes('srcset='));
+    assert.ok(!html.includes('[data-reveal] { opacity: 0'));
     const data = JSON.parse(html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)[1]);
     assert.equal(data.url, site + route);
     assert.equal(data['@id'], site + '/#luxury-villas');
