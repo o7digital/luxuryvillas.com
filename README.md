@@ -1,13 +1,13 @@
 # Luxury Villas
 
-Static website built with Astro. Development takes place on the `dev` branch.
+Prerendered website built with Astro, with a server-side Olivia chat endpoint. Development takes place on the `dev` branch.
 
 ## Local development
 
 Use Node.js 24 and install dependencies with `npm ci`.
 
 - `npm run dev`: start the development server.
-- `npm run build`: generate the static site in `dist/`.
+- `npm run build`: generate the pages in `dist/client/` and the Vercel chat function.
 - `npm run preview`: preview the generated site.
 
 ## Structure
@@ -23,8 +23,13 @@ browser scripts. Images retain their original files and quality.
 ## Deployment
 
 The linked Vercel project uses the Astro configuration in `vercel.json` and
-serves `dist/`. Build with `vercel build --prod`, then deploy using
+uses the Vercel adapter to serve prerendered pages and the chat API. Build with `vercel build --prod`, then deploy using
 `vercel deploy --prebuilt --prod`.
+
+## Olivia AI
+
+See [the integration guide](docs/olivia.md) for the VPS2 gateway, environment
+configuration and verification.
 
 ## SEO content
 

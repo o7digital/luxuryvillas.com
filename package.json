@@ -10,6 +10,10 @@
     "test:seo": "node scripts/check-seo.mjs"
   },
   "dependencies": {
+    "@astrojs/vercel": "^11.0.13",
     "astro": "^7.3.8"
+  },
+  "overrides": {
+    "path-to-regexp": "^6.3.0"
   }
 }
