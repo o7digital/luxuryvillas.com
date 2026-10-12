@@ -7,10 +7,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test:seo": "node scripts/check-seo.mjs"
+    "test:seo": "node scripts/check-seo.mjs",
+    "test:olivia": "node scripts/check-olivia-function.mjs"
   },
   "dependencies": {
-    "@astrojs/vercel": "^11.0.13",
+    "@astrojs/vercel": "11.0.12",
     "astro": "^7.3.8"
   },
   "overrides": {
