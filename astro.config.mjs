@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://luxuryvillasbylacasaquecanta.com',
+  site: 'https://www.luxuryvillasbylacasaquecanta.com',
   output: 'static',
   trailingSlash: 'always',
 });

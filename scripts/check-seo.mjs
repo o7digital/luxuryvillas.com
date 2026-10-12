@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 
-const site = 'https://luxuryvillasbylacasaquecanta.com';
+const site = 'https://www.luxuryvillasbylacasaquecanta.com';
 for (const route of ['/', '/es/', '/privacy-policy/']) {
   const html = readFileSync(`dist${route}index.html`, 'utf8');
   assert.equal([...html.matchAll(/rel="canonical"/g)].length, 1);
