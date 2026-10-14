@@ -11,7 +11,7 @@ for (const route of ['/', '/es/', '/privacy-policy/']) {
   assert.ok(html.includes('property="og:image"'));
   assert.ok(html.includes('name="twitter:image"'));
   assert.ok(!html.includes('github.com/o7digital'));
-  assert.ok(html.includes('<luxury-olivia'));
+  assert.ok(!html.includes('<luxury-olivia'), 'Olivia must remain disabled on public pages');
   assert.ok(!html.includes('OLIVIA_GATEWAY_KEY'));
   if (route !== '/privacy-policy/') {
     for (const [language, path] of [['en', '/'], ['es', '/es/'], ['x-default', '/']]) {
