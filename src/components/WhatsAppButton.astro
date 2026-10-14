@@ -1,0 +1,16 @@
+---
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+---
+<a class="whatsapp-button" href="https://wa.me/525525641838" target="_blank" rel="noopener noreferrer" aria-label={lang === 'es' ? 'Contactar por WhatsApp' : 'Chat with us on WhatsApp'}>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.6-4.9a8.5 8.5 0 1 1 15.9-4.1Z" />
+    <path d="M8.2 7.5c-.8.8-.3 2.7 1.5 4.5s3.7 2.3 4.5 1.5l1-1-2-1.2-.8.8c-.7-.3-1.9-1.5-2.2-2.2l.8-.8-1.2-2-1.6.4Z" />
+  </svg>
+  <span>WhatsApp</span>
+</a>
+<style>
+  a.whatsapp-button { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; align-self: flex-start; min-height: 46px; padding: .75rem 1.25rem; border-radius: 6px; background: #25d366; color: #082b16; font: 600 .9rem/1.2 Arial, sans-serif; text-decoration: none; transition: background .2s; }
+  a.whatsapp-button:hover { background: #1fbd5a; color: #082b16; }
+  a.whatsapp-button:focus-visible { outline: 3px solid #25d366; outline-offset: 4px; }
+</style>

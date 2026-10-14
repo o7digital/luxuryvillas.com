@@ -1,4 +1,5 @@
 ---
+import WhatsAppButton from "./WhatsAppButton.astro";
 const { lang = 'en' } = Astro.props;
 const es = lang === 'es';
 const copy = es ? {
@@ -19,7 +20,8 @@ const copy = es ? {
   <div class="contact-intro">
     <p class="eyebrow">{copy.label}</p>
     <h2 id="contact-title">{copy.title}</h2>
-    <p>{copy.intro}</p>
+    <p class="intro-copy">{copy.intro}</p>
+    <WhatsAppButton lang={es ? "es" : "en"} />
   </div>
   <form class="enquiry-form" action="https://formspree.io/f/moejlkyy" method="POST" data-sending={copy.sending} data-success={copy.success} data-error={copy.error}>
     <input type="hidden" name="_subject" value="Luxury Villas — Contact enquiry" />
@@ -37,7 +39,7 @@ const copy = es ? {
   .contact-section { scroll-margin-top: 7rem; padding: clamp(4rem, 8vw, 7rem) 7vw; background: #faf8f3; color: #141815; display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 6vw, 6rem); }
   .eyebrow { text-transform: uppercase; letter-spacing: .2em; font-size: .75rem; color: #727b6a; }
   h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(2.5rem, 4vw, 4.5rem); line-height: 1.12; margin: 1rem 0 1.5rem; }
-  .contact-intro > p:last-child { max-width: 26rem; color: #6e716a; }
+  .contact-intro > p.intro-copy { max-width: 26rem; color: #6e716a; margin-bottom: 1.5rem; }
   .enquiry-form { display: grid; gap: 1.3rem; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
   label { display: grid; gap: .5rem; font-size: .85rem; }
