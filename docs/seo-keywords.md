@@ -84,7 +84,9 @@ remain to be verified; existing copy confirms four suites and eight guests.
 The full 47-expression strategy above remains the reference. The selection
 prioritizes brand names, Playa La Ropa, rental intent and confirmed services.
 It is a relevance-based selection, not a measured keyword-difficulty ranking.
-Every English villa keyword must include “luxury villa” or “luxury villas”;
-Spanish equivalents must include “villa de lujo” or “villas de lujo”.
+Footer keywords describe the collection in the plural: “luxury villas” in
+English and “villas de lujo” in Spanish. Keep property names as written.
+Singular phrases in the strategy above are reserved for individual properties;
+do not use them as generic collection keywords in the footer.
 English pages use the corrected list; `/es/` uses Spanish translations.
 The data lives in `src/data/footer-keywords.json`.
