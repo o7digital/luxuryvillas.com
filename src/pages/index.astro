@@ -94,9 +94,10 @@ import Seo from "../components/Seo.astro";
       border-color: rgba(255,255,255,.12);
     }
     .brand { display: inline-flex; align-items: center; gap: .8rem; width: max-content; }
-    .brand-logo { width: 160px; height: auto; object-fit: contain; }
     .brand-copy { font-size: .68rem; letter-spacing: .19em; line-height: 1.2; text-transform: uppercase; }
     .brand-copy small { display: block; font-size: .5rem; letter-spacing: .28em; margin-top: .3rem; opacity: .7; }
+    .site-header .brand-copy { font-size: .884rem; }
+    .site-header .brand-copy small { font-size: .65rem; }
     .main-nav { display: flex; justify-content: center; align-items: center; gap: clamp(1.4rem, 2.4vw, 2.8rem); font-size: .92rem; text-transform: uppercase; letter-spacing: .13em; }
     .main-nav a { position: relative; padding: .5rem 0; }
     .main-nav a::after {
@@ -328,7 +329,7 @@ import Seo from "../components/Seo.astro";
 
     @media (min-width: 761px) and (max-width: 1250px) {
       .site-header { gap: .8rem; padding-left: 2vw; padding-right: 2vw; }
-      .brand-copy { display: none; }
+
       .main-nav { gap: 1rem; font-size: .75rem; letter-spacing: .08em; }
       .header-actions { gap: .8rem; }
       .book-link, .language { font-size: .75rem; }
@@ -367,7 +368,6 @@ import Seo from "../components/Seo.astro";
 
   <header class="site-header" id="header">
     <a class="brand" href="#top" aria-label="Luxury Villas by La Casa Que Canta home">
-      <img class="brand-logo" src="/assets/responsive/logo-480.webp" srcset="/assets/responsive/logo-240.webp 240w, /assets/responsive/logo-480.webp 480w" sizes="180px" alt="La Casa Que Canta" />
       <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
