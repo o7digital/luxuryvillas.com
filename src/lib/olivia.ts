@@ -1,3 +1,5 @@
+import { normalizeEnquiry } from '../../infrastructure/olivia/enquiry.mjs';
+
 const json = (status: number, body: object) => new Response(JSON.stringify(body), {
   status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
 });
@@ -18,13 +20,14 @@ export async function oliviaRequest(request: Request, clientAddress: string, con
     let body;
     try { body = JSON.parse(raw); } catch { return json(400, { error: 'Invalid JSON' }); }
     if (!body || typeof body.message !== 'string' || !body.message.trim() || body.message.length > (contact ? 5000 : 2000) || !['es', 'en'].includes(body.language) || body.consent !== true || (body.conversation != null && (typeof body.conversation !== 'string' || !/^[a-f0-9]{24}\.[A-Za-z0-9_-]{43}$/.test(body.conversation)))) return json(400, { error: 'Invalid message or consent' });
-    if (contact && (typeof body.name !== 'string' || !body.name.trim() || body.name.length > 200 || typeof body.email !== 'string' || body.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email) || (body.phone != null && (typeof body.phone !== 'string' || body.phone.length > 60)))) return json(400, { error: 'Invalid contact details' });
+    const details = contact ? normalizeEnquiry(body, { allowLegacy: true }) : null;
+    if (contact && !details) return json(400, { error: 'Invalid contact details or stay dates' });
     const key = process.env.OLIVIA_GATEWAY_KEY || import.meta.env.OLIVIA_GATEWAY_KEY;
     if (!key) return json(503, { error: 'Olivia unavailable' });
     const response = await fetch('https://olivia.o7digitalgroup.com/luxuryvillas/chat', {
       method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}`, 'X-Visitor-IP': clientAddress },
       body: JSON.stringify({ message: body.message.trim(), language: body.language, conversation: body.conversation,
-        ...(contact ? { action: 'contact', name: body.name.trim(), email: body.email.trim(), phone: body.phone?.trim(), consent: true } : {}),
+        ...(contact ? { ...details, action: 'contact', consent: true } : {}),
       }), signal: AbortSignal.timeout(57000),
     });
     if (!response.ok) return json([400, 403, 429].includes(response.status) ? response.status : 503, { error: contact ? 'Enquiry not sent' : 'Olivia unavailable' });

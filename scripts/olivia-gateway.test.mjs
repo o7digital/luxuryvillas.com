@@ -36,7 +36,9 @@ async function fixture(t, options = {}) {
   return { post, calls, url };
 }
 
-const enquiry = { action: 'contact', language: 'en', name: 'Test Visitor', email: 'visitor@example.test', phone: '+1 555 0100', message: 'Please contact me about dates.', consent: true };
+const arrivalDate = `${new Date().getUTCFullYear() + 1}-03-12`;
+const departureDate = `${new Date().getUTCFullYear() + 1}-03-17`;
+const enquiry = { action: 'contact', contactFormVersion: 2, language: 'en', firstName: 'Test', lastName: 'Visitor', name: 'Test Visitor', arrivalDate, departureDate, email: 'visitor@example.test', phone: '+1 555 0100', whatsapp: '+52 755 123 4567', message: 'Please contact me about dates.', consent: true };
 
 test('chat remains separate from Formspree; explicit enquiry includes the authoritative conversation', async t => {
   const { post, calls } = await fixture(t);
@@ -53,6 +55,12 @@ test('chat remains separate from Formspree; explicit enquiry includes the author
   assert.equal(payload.name, enquiry.name);
   assert.equal(payload.email, enquiry.email);
   assert.equal(payload.phone, enquiry.phone);
+  assert.equal(payload.first_name, enquiry.firstName);
+  assert.equal(payload.last_name, enquiry.lastName);
+  assert.equal(payload.arrival_date, arrivalDate);
+  assert.equal(payload.departure_date, departureDate);
+  assert.equal(payload.whatsapp, enquiry.whatsapp);
+  assert.ok(payload.message.includes(`Arrival: ${arrivalDate}`));
   assert.match(payload.message, /Visitor: We are eight guests/);
   assert.match(payload.message, /Olivia: Each villa accommodates/);
   assert.ok(!payload.message.includes('Forged browser transcript'));
@@ -98,4 +106,27 @@ test('contact submission rate limit prevents repeated outbound deliveries', asyn
   for (let index = 0; index < 3; index++) assert.equal((await post({ ...enquiry, message: `Enquiry ${index}` })).status, 200);
   assert.equal((await post({ ...enquiry, message: 'Enquiry 4' })).status, 429);
   assert.equal(calls.filter(call => call.url.includes('formspree')).length, 3);
+});
+
+test('stay details and a reachable number are required for the current form', async t => {
+  const { post, calls } = await fixture(t);
+  assert.equal((await post({ ...enquiry, phone: '', whatsapp: '' })).status, 400);
+  assert.equal((await post({ ...enquiry, arrivalDate: '2000-01-01' })).status, 400);
+  assert.equal((await post({ ...enquiry, departureDate: arrivalDate })).status, 400);
+  assert.equal(calls.length, 0);
+});
+
+test('WhatsApp-only enquiries are accepted and changed dates are a separate enquiry', async t => {
+  const { post, calls } = await fixture(t);
+  assert.equal((await post({ ...enquiry, phone: '', departureDate: '' })).status, 200);
+  assert.equal((await post({ ...enquiry, phone: '', departureDate })).status, 200);
+  assert.equal(calls.filter(call => call.url.includes('formspree')).length, 2);
+  const payload = calls.find(call => call.url.includes('formspree')).body;
+  assert.equal(payload.phone, '');
+  assert.equal(payload.whatsapp, enquiry.whatsapp);
+});
+
+test('already-open pages can still submit their previous contact form', async t => {
+  const { post } = await fixture(t);
+  assert.equal((await post({ action: 'contact', language: 'en', name: 'Existing Visitor', email: 'visitor@example.test', message: 'Previous form still open.', consent: true })).status, 200);
 });

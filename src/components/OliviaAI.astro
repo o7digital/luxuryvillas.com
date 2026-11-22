@@ -43,7 +43,9 @@ const es = lang === 'es';
       .lead-view h3 { margin: 0 0 8px; font-size: 17px; }
       .lead-view > p { margin: 0 0 14px; font-size: 12px; color: #625b51; }
       .lead-form { display: grid; gap: 10px; }
+      .lead-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
       .lead-form label { display: grid; gap: 4px; font-size: 12px; }
+      .lead-note { margin: 0; font-size: 11px; color: #625b51; }
       .lead-form input, .lead-form textarea { width: 100%; min-width: 0; border: 1px solid #bfb5a4; border-radius: 8px; padding: 9px; background: white; color: #2b2b2b; }
       .lead-form textarea { resize: vertical; min-height: 80px; }
       .lead-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -61,6 +63,7 @@ const es = lang === 'es';
       @keyframes enter { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
       @media (hover: hover) { .toggle:hover { transform: translateY(-2px); box-shadow: 0 22px 44px -16px #000b, inset 0 1px 0 #ffffff30; } .actions button:hover:not(:disabled) { background: #eadfc9; border-color: #a88b55; } .open-contact:hover:not(:disabled) { background: #eadfc9; } }
       @media (max-width: 600px) { :host { right: 16px; bottom: 16px; } .panel { position: fixed; right: 12px; left: 12px; bottom: 92px; width: auto; max-width: none; height: min(660px, calc(100dvh - 110px)); border-radius: 24px; } header { padding: 16px; } .messages { padding: 16px; } }
+      @media (max-width: 380px) { .lead-row { grid-template-columns: minmax(0, 1fr); } }
       @media (max-height: 650px) { .panel { position: fixed; right: 12px; bottom: 12px; height: calc(100dvh - 24px); } .toggle[aria-expanded="true"] { visibility: hidden; } header { padding: 14px; } .actions { display: flex; overflow-x: auto; flex-shrink: 0; padding: 8px 16px; } .actions button { flex: none; white-space: nowrap; } }
       @media (max-height: 450px) { .brand, .status, .footnote, .actions { display: none; } header { align-items: center; padding: 10px 16px; } .consent { padding: 6px 16px; font-size: 10px; } .chat-form { padding: 8px 16px; } }
       @media (prefers-reduced-motion: reduce) { .panel, .typing-dot { animation: none; } .toggle, .actions button, .open-contact { transition: none; } .toggle:hover { transform: none; } }
@@ -76,22 +79,33 @@ const es = lang === 'es';
         <button type="button" data-prompt={es ? '¿Cuál es la diferencia entre El Ensueño y El Murmullo?' : 'What is the difference between El Ensueño and El Murmullo?'}>{es ? 'Las villas' : 'The villas'}</button>
         <button type="button" data-prompt={es ? '¿Para cuántas personas es cada villa?' : 'How many guests can stay in each villa?'}>{es ? 'Suites y huéspedes' : 'Suites & guests'}</button>
         <button type="button" data-prompt={es ? '¿Qué servicios ofrece cada villa?' : 'What services does each villa offer?'}>{es ? 'Servicios' : 'Services'}</button>
-        <button type="button" data-prompt={es ? '¿Cómo puedo consultar disponibilidad y tarifas?' : 'How can I check availability and rates?'}>{es ? 'Disponibilidad y tarifas' : 'Availability & rates'}</button>
+        <button type="button" data-enquiry data-prompt={es ? 'Quisiera información sobre disponibilidad y tarifas.' : 'I would like information about availability and rates.'}>{es ? 'Disponibilidad y tarifas' : 'Availability & rates'}</button>
       </div>
       <section class="lead-view" aria-labelledby="olivia-contact-title" hidden>
-        <h3 id="olivia-contact-title">{es ? 'Enviar una consulta' : 'Send an enquiry'}</h3>
+        <h3 id="olivia-contact-title">{es ? 'Solicitar información' : 'Request information'}</h3>
         <p>{es ? 'Tus datos y tu conversación se enviarán a nuestro equipo de reservaciones.' : 'Your details and conversation will be sent to our reservations team.'}</p>
         <form class="lead-form">
-          <label>{es ? 'Nombre completo' : 'Full name'}<input name="name" autocomplete="name" required maxlength="200" /></label>
+          <div class="lead-row">
+            <label>{es ? 'Nombre' : 'First name'}<input name="firstName" autocomplete="given-name" required maxlength="100" /></label>
+            <label>{es ? 'Apellido' : 'Last name'}<input name="lastName" autocomplete="family-name" required maxlength="100" /></label>
+          </div>
+          <div class="lead-row">
+            <label>{es ? 'Fecha de llegada' : 'Arrival date'}<input name="arrivalDate" type="date" required /></label>
+            <label>{es ? 'Salida (opcional)' : 'Departure (optional)'}<input name="departureDate" type="date" /></label>
+          </div>
           <label>{es ? 'Correo electrónico' : 'Email address'}<input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
-          <label>{es ? 'Teléfono (opcional)' : 'Phone (optional)'}<input name="phone" type="tel" autocomplete="tel" maxlength="60" /></label>
+          <div class="lead-row">
+            <label>{es ? 'Teléfono móvil' : 'Mobile number'}<input name="phone" type="tel" autocomplete="tel" maxlength="60" aria-describedby="olivia-phone-note" /></label>
+            <label>WhatsApp<input name="whatsapp" type="tel" maxlength="60" aria-describedby="olivia-phone-note" /></label>
+          </div>
+          <p class="lead-note" id="olivia-phone-note">{es ? 'Indica al menos un número, con código de país. Puedes usar el mismo para móvil y WhatsApp.' : 'Provide at least one number, including the country code. You can use the same number for mobile and WhatsApp.'}</p>
           <label>{es ? 'Tu consulta' : 'Your enquiry'}<textarea name="message" rows="3" required maxlength="5000"></textarea></label>
           <p class="lead-feedback" role="status" aria-live="polite"></p>
           <div class="lead-buttons"><button class="lead-submit" type="submit" disabled>{es ? 'Enviar consulta' : 'Send enquiry'}</button><button class="back-to-chat" type="button">{es ? 'Volver al chat' : 'Back to chat'}</button></div>
         </form>
       </section>
       <div class="consent"><label><input type="checkbox" /><span>{es ? 'He leído y acepto el ' : 'I have read and accept the '}<a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">{es ? 'Aviso de Privacidad' : 'Privacy Notice'}</a>{es ? ' para conversar con Olivia. Al enviar una consulta, comparto mis datos y mi conversación con reservaciones.' : ' to chat with Olivia. When I send an enquiry, I share my details and conversation with reservations.'}</span></label></div>
-      <div class="contact"><button class="open-contact" type="button"><span>{es ? 'Enviar una consulta a reservaciones' : 'Send an enquiry to reservations'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
+      <div class="contact"><button class="open-contact" type="button"><span>{es ? 'Solicitar información' : 'Request information'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
       <p class="error" role="alert" hidden></p>
       <form class="chat-form"><input type="text" aria-label={es ? 'Tu mensaje' : 'Your message'} placeholder={es ? 'Escribe tu pregunta…' : 'Ask your question…'} maxlength="2000" disabled /><button class="send" type="submit" aria-label={es ? 'Enviar' : 'Send'} disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form>
       <div class="footnote">{es ? 'Disponibilidad y tarifas confirmadas por reservas.' : 'Availability and rates confirmed by reservations.'}</div>
@@ -100,6 +114,8 @@ const es = lang === 'es';
   </template>
 </luxury-olivia>
 <script>
+  import { isEnquiryIntent, isPhoneNumber, todayInZihuatanejo } from '../../infrastructure/olivia/enquiry.mjs';
+
   class LuxuryOlivia extends HTMLElement {
     connectedCallback() {
       if (this.shadowRoot) return;
@@ -115,7 +131,11 @@ const es = lang === 'es';
       const form = root.querySelector<HTMLFormElement>('.chat-form')!;
       const leadView = root.querySelector<HTMLElement>('.lead-view')!;
       const leadForm = root.querySelector<HTMLFormElement>('.lead-form')!;
-      const leadName = root.querySelector<HTMLInputElement>('.lead-form [name="name"]')!;
+      const leadName = root.querySelector<HTMLInputElement>('.lead-form [name="firstName"]')!;
+      const arrival = root.querySelector<HTMLInputElement>('[name="arrivalDate"]')!;
+      const departure = root.querySelector<HTMLInputElement>('[name="departureDate"]')!;
+      const phone = root.querySelector<HTMLInputElement>('.lead-form [name="phone"]')!;
+      const whatsapp = root.querySelector<HTMLInputElement>('[name="whatsapp"]')!;
       const leadMessage = root.querySelector<HTMLTextAreaElement>('.lead-form [name="message"]')!;
       const leadFeedback = root.querySelector<HTMLElement>('.lead-feedback')!;
       const leadSubmit = root.querySelector<HTMLButtonElement>('.lead-submit')!;
@@ -128,6 +148,18 @@ const es = lang === 'es';
       const actions = [...root.querySelectorAll<HTMLButtonElement>('[data-prompt]')];
       const sendButton = root.querySelector<HTMLButtonElement>('.send')!;
       const es = this.lang === 'es';
+      const setDateBounds = () => {
+        arrival.min = todayInZihuatanejo();
+        departure.min = arrival.value ? new Date(new Date(`${arrival.value}T12:00:00Z`).getTime() + 86400000).toISOString().slice(0, 10) : arrival.min;
+      };
+      const validatePhones = () => {
+        const missing = !phone.value.trim() && !whatsapp.value.trim();
+        const invalid = es ? 'Indica un número válido con código de país.' : 'Enter a valid number including the country code.';
+        phone.setCustomValidity(missing ? (es ? 'Indica un móvil o un número de WhatsApp.' : 'Provide a mobile or WhatsApp number.') : phone.value.trim() && !isPhoneNumber(phone.value.trim()) ? invalid : '');
+        whatsapp.setCustomValidity(whatsapp.value.trim() && !isPhoneNumber(whatsapp.value.trim()) ? invalid : '');
+      };
+      setDateBounds(); arrival.addEventListener('input', setDateBounds);
+      phone.addEventListener('input', validatePhones); whatsapp.addEventListener('input', validatePhones);
       let busy = false;
       let leadBusy = false;
       let lastUserMessage = '';
@@ -139,7 +171,7 @@ const es = lang === 'es';
       addMessage(es ? 'Hola, soy Olivia, tu concierge de villas. ¿Frente al mar en El Ensueño o sobre la bahía en El Murmullo? Cuéntame cómo imaginas tu estancia; te ayudo a descubrir las villas y a contactar a reservaciones.' : 'Hello, I’m Olivia, your villa concierge. Beachfront at El Ensueño or above the bay at El Murmullo? Tell me what your ideal stay looks like. I can help you explore the villas and connect with reservations.');
       const update = () => {
         input.disabled = !consent.checked || busy || leadBusy; sendButton.disabled = input.disabled;
-        actions.forEach(button => { button.disabled = input.disabled; });
+        actions.forEach(button => { button.disabled = button.hasAttribute('data-enquiry') ? busy || leadBusy : input.disabled; });
         openContact.disabled = busy || leadBusy; leadSubmit.disabled = !consent.checked || busy || leadBusy;
         back.disabled = leadBusy; consent.disabled = leadBusy;
         leadForm.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach(field => { field.disabled = leadBusy; });
@@ -157,8 +189,13 @@ const es = lang === 'es';
       consent.addEventListener('change', update); update();
       const send = async (text: string) => {
         if (!consent.checked || busy || !text.trim()) return;
-        text = text.trim(); busy = true; update(); error.hidden = true;
+        text = text.trim();
         addMessage(text, true); lastUserMessage = text; input.value = '';
+        if (isEnquiryIntent(text)) {
+          if (!leadMessage.value.includes(text)) leadMessage.value = [leadMessage.value, text].filter(Boolean).join('\n\n');
+          showLead(true); return;
+        }
+        busy = true; update(); error.hidden = true;
         const pending = addMessage(''); pending.classList.add('typing');
         const replyLabel = document.createElement('span'); replyLabel.className = 'sr-only'; replyLabel.textContent = es ? 'Olivia está respondiendo…' : 'Olivia is replying…'; pending.append(replyLabel);
         for (let index = 0; index < 3; index++) { const dot = document.createElement('span'); dot.className = 'typing-dot'; dot.setAttribute('aria-hidden', 'true'); pending.append(dot); }
@@ -176,20 +213,25 @@ const es = lang === 'es';
         } finally { busy = false; update(); messages.removeAttribute('aria-busy'); messages.scrollTop = messages.scrollHeight; if (!panel.hidden) input.focus(); }
       };
       form.addEventListener('submit', event => { event.preventDefault(); void send(input.value); });
-      actions.forEach(button => button.addEventListener('click', () => { void send(button.dataset.prompt!); }));
+      actions.forEach(button => button.addEventListener('click', () => {
+        if (button.hasAttribute('data-enquiry')) { if (!leadMessage.value) leadMessage.value = button.dataset.prompt!; showLead(true); }
+        else void send(button.dataset.prompt!);
+      }));
       leadForm.addEventListener('submit', async event => {
         event.preventDefault();
-        if (!consent.checked || busy || leadBusy || !leadForm.reportValidity()) return;
+        if (!consent.checked || busy || leadBusy) return;
+        setDateBounds(); validatePhones();
+        if (!leadForm.reportValidity()) return;
         const fields = new FormData(leadForm);
         leadBusy = true; update(); leadFeedback.textContent = es ? 'Enviando…' : 'Sending…';
         try {
           const response = await fetch('/api/olivia/contact/', {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(60000),
-            body: JSON.stringify({ name: fields.get('name'), email: fields.get('email'), phone: fields.get('phone'), message: fields.get('message'), language: es ? 'es' : 'en', conversation, consent: true }),
+            body: JSON.stringify({ contactFormVersion: 2, firstName: fields.get('firstName'), lastName: fields.get('lastName'), arrivalDate: fields.get('arrivalDate'), departureDate: fields.get('departureDate'), email: fields.get('email'), phone: fields.get('phone'), whatsapp: fields.get('whatsapp'), message: fields.get('message'), language: es ? 'es' : 'en', conversation, consent: true }),
           });
           const data = await response.json();
           if (!response.ok || data.submitted !== true) throw new Error('Enquiry not sent');
-          this.dataset.version = data.version; leadForm.reset(); leadFeedback.textContent = ''; showLead(false);
+          this.dataset.version = data.version; leadForm.reset(); setDateBounds(); leadFeedback.textContent = ''; showLead(false);
           addMessage(es ? 'Tu consulta y tu conversación se han enviado al equipo de reservaciones. Gracias.' : 'Your enquiry and conversation have been sent to our reservations team. Thank you.');
         } catch {
           leadFeedback.textContent = es ? 'No se pudo enviar tu consulta. Inténtalo de nuevo o escribe a sales.reservations@lacasaquecanta.com.' : 'Your enquiry could not be sent. Please try again or email sales.reservations@lacasaquecanta.com.';

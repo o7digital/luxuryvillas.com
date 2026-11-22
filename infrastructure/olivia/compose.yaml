@@ -54,7 +54,7 @@ services:
     working_dir: /app
     command: [node, gateway.mjs]
     env_file: .env
-    volumes: [./gateway.mjs:/app/gateway.mjs:ro]
+    volumes: [./gateway.mjs:/app/gateway.mjs:ro, ./enquiry.mjs:/app/enquiry.mjs:ro]
     depends_on:
       core: {condition: service_healthy}
     networks: [o7-apps, private]

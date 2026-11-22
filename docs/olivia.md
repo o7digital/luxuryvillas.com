@@ -11,8 +11,17 @@ stores the conversation in PostgreSQL.
 Browser → `POST /api/olivia/` → authenticated Luxury Villas gateway → private
 Olivia 3.6 `/v1/chat`. Chatting alone never sends a Formspree submission.
 
-“Send an enquiry to reservations” collects name, email, optional phone and the
-request. After explicit visitor submission, `/api/olivia/contact/` forwards
+Information, rates, availability and booking requests open the information
+form immediately. The availability action and “Request information” also
+open it directly. General villa questions continue through the AI chat.
+The visitor's request is kept in the form; earlier chat messages are attached
+from the server when the visitor submits. Opening the form sends nothing.
+
+The form collects first and last name, arrival date, optional departure date,
+email, and at least one mobile or WhatsApp number. Dates must be valid, arrival
+cannot be in the past in Zihuatanejo, and departure must follow arrival.
+WhatsApp is a contact field only; there is no WhatsApp button or automated send.
+After explicit visitor submission, `/api/olivia/contact/` forwards
 these validated fields to the gateway. The gateway verifies the signed
 conversation identifier, retrieves the transcript from the core (never from
 browser-supplied text), and posts the enquiry plus user/assistant messages to
@@ -58,13 +67,16 @@ bookings, execute visitor-requested tools or send WhatsApp messages.
 `OLIVIA_GATEWAY_KEY` is a sensitive, server-only Vercel production variable.
 The matching gateway key is in the private VPS `.env`. Provider credentials,
 service passwords and JWTs never go to the browser or this repository.
+Shared enquiry validation and intent rules in `infrastructure/olivia/enquiry.mjs`
+contain no credentials and are used by the browser, API and gateway. The
+gateway and API retain compatibility for older forms already open in a tab.
 Development uses the ignored `.env.local`. APIs allow exact production and
 current Vercel deployment/branch origins; development also permits localhost
 ports 4321 and 4330.
 
 Provisioning is restricted to the dedicated server directory. Preserve
 private backups, then copy `compose.yaml`, `gateway.mjs`,
-`site-instructions.txt` and `provision.py`. Build the pinned private core image
+`enquiry.mjs`, `site-instructions.txt` and `provision.py`. Build the pinned private core image
 on the host before starting it. Run these phases in order for a new stack:
 
 ```sh
@@ -81,7 +93,11 @@ docker compose up -d gateway
 The configure phase privately reuses the existing server-side Olivia provider
 credential. Generated secrets remain in mode-0600 files on the host. Run
 `isolate` again after schema migrations. For gateway edits, copy the file and
-run `docker compose up -d --force-recreate gateway`. Gateway health is
+run `docker compose up -d --force-recreate gateway`. After updating the
+mounted site instructions, `python3 provision.py knowledge` refreshes the
+single approved document and its search vectors in a tenant-scoped transaction.
+It preserves conversations and makes no change if the approved document is
+missing or ambiguous. Gateway health is
 available inside the container; the public proxy exposes only the chat route.
 Do not run `docker compose down -v`: it deletes the conversation database.
 
@@ -95,7 +111,8 @@ must have the sensitive gateway variable before deployment.
 Run `npm run build`, `npm run test:seo` and `npm run test:olivia`. Gateway tests
 exercise separation of chat/contact, server-authoritative transcript,
 consent/authentication, rejection of older engines, delivery failures,
-retries, duplicate suppression and rate limits. Those Formspree calls are
+retries, duplicate suppression, qualified contact fields, dates, phone/WhatsApp
+validation, information intent and rate limits. Those Formspree calls are
 mocked and send no messages. The packaged function is imported outside the
 workspace to detect missing runtime dependencies.
 

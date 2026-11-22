@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { normalizeEnquiry } from './enquiry.mjs';
 const tenant = 'luxuryvillas';
 const equal = (a, b) => typeof a === 'string' && Buffer.byteLength(a) === Buffer.byteLength(b) && timingSafeEqual(Buffer.from(a), Buffer.from(b));
 export function createGateway(env = process.env, fetcher = fetch) {
@@ -73,7 +74,8 @@ export function createGateway(env = process.env, fetcher = fetch) {
     if (limits.size > 5000) limits.delete(limits.keys().next().value);
     if (rate.count > (contact ? 3 : 12)) return json(429, { error: 'Too many requests' });
     if (typeof body.message !== 'string' || !body.message.trim() || body.message.length > (contact ? 5000 : 2000)) return json(400, { error: 'Invalid message' });
-    if (contact && (body.consent !== true || typeof body.name !== 'string' || !body.name.trim() || body.name.length > 200 || typeof body.email !== 'string' || body.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email) || (body.phone != null && (typeof body.phone !== 'string' || body.phone.length > 60)))) return json(400, { error: 'Invalid contact details or consent' });
+    const details = contact ? normalizeEnquiry(body, { allowLegacy: true }) : null;
+    if (contact && (body.consent !== true || !details)) return json(400, { error: 'Invalid contact details, dates or consent' });
     try {
       const coreVersion = await version();
       if (!contact) {
@@ -81,7 +83,7 @@ export function createGateway(env = process.env, fetcher = fetch) {
         if (typeof result.answer !== 'string' || !result.answer.trim() || !/^[a-f0-9]{24}$/.test(result.conversation_id)) throw new Error('Invalid core response');
         return json(200, { answer: result.answer, conversation: `${result.conversation_id}.${sign(result.conversation_id)}`, version: coreVersion });
       }
-      const operationId = sign(JSON.stringify([cid, body.name.trim(), body.email.trim().toLowerCase(), body.phone || '', body.message.trim(), body.language]));
+      const operationId = sign(JSON.stringify([cid, details, body.message.trim(), body.language]));
       if (!deliveries.has(operationId)) {
         const operation = (async () => {
           let transcript = '';
@@ -91,11 +93,13 @@ export function createGateway(env = process.env, fetcher = fetch) {
             transcript = record.messages.filter(message => ['user', 'assistant'].includes(message.role)).slice(-60)
               .map(message => `${message.role === 'user' ? 'Visitor' : 'Olivia'}: ${message.content}`).join('\n\n').slice(-30000);
           }
+          const stay = details.contactFormVersion === 2 ? `\n\n--- Stay and contact details ---\nFirst name: ${details.firstName}\nLast name: ${details.lastName}\nArrival: ${details.arrivalDate}\nDeparture: ${details.departureDate || 'Not specified'}\nMobile: ${details.phone || 'Not specified'}\nWhatsApp: ${details.whatsapp || 'Not specified'}` : '';
           const page = `https://www.luxuryvillasbylacasaquecanta.com/${body.language === 'es' ? 'es/' : ''}`;
           const response = await fetcher('https://formspree.io/f/moejlkyy', {
             method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json', Origin: 'https://www.luxuryvillasbylacasaquecanta.com', Referer: page }, signal: AbortSignal.timeout(20000),
-            body: JSON.stringify({ name: body.name.trim(), email: body.email.trim().toLowerCase(), phone: body.phone?.trim() || '',
-              message: body.message.trim() + (transcript ? `\n\n--- Olivia conversation ---\n\n${transcript}` : ''),
+            body: JSON.stringify({ name: details.name, email: details.email, phone: details.phone,
+              first_name: details.firstName || '', last_name: details.lastName || '', arrival_date: details.arrivalDate || '', departure_date: details.departureDate || '', whatsapp: details.whatsapp || '',
+              message: body.message.trim() + stay + (transcript ? `\n\n--- Olivia conversation ---\n\n${transcript}` : ''),
               _subject: 'Luxury Villas — Olivia AI enquiry', source: 'Olivia AI 3.6 — Luxury Villas', language: body.language,
               page,
               conversation_id: cid || '', consent: 'Visitor explicitly approved sending this enquiry and conversation to reservations.',

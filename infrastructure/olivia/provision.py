@@ -79,4 +79,31 @@ print('Dedicated service identity and approved villa knowledge ready.')
 """
  result=subprocess.run(['docker','exec','-i','luxuryvillas-olivia36','python','-c',script],input=json.dumps(payload).encode(),check=True,capture_output=True)
  print(result.stdout.decode().strip());(ROOT/'.bootstrapped').write_text('Olivia 3.6 tenant initialized\n')
+elif phase=='knowledge':
+ script="""
+import json
+from pathlib import Path
+from sqlalchemy import select,delete
+from app.db import tenant_session
+from app.models import Document,DocumentChunk,Audit
+from app.embeddings import get_provider
+from app.config import CHUNK_SIZE,CHUNK_OVERLAP
+content=Path('/app/site-instructions.txt').read_text()
+with tenant_session('luxuryvillas') as db:
+ docs=list(db.scalars(select(Document).where(Document.tenant_id=='luxuryvillas',Document.title=='Approved Luxury Villas information',Document.source=='https://www.luxuryvillasbylacasaquecanta.com/')))
+ if len(docs)!=1:raise SystemExit('Expected exactly one approved Luxury Villas document; no changes made')
+ doc=docs[0]
+ if doc.content==content:print('Approved Luxury Villas knowledge already current.');raise SystemExit(0)
+ parts=[content[pos:pos+CHUNK_SIZE] for pos in range(0,len(content),CHUNK_SIZE-CHUNK_OVERLAP) if content[pos:pos+CHUNK_SIZE].strip()]
+ vectors=get_provider().embed(parts)
+ if len(vectors)!=len(parts):raise SystemExit('Embedding refresh incomplete; no changes made')
+ db.execute(delete(DocumentChunk).where(DocumentChunk.tenant_id=='luxuryvillas',DocumentChunk.document_id==doc.id))
+ for index,(part,vector) in enumerate(zip(parts,vectors)):
+  db.add(DocumentChunk(tenant_id='luxuryvillas',document_id=doc.id,chunk_index=index,content=part,source=doc.source,metadata_json=doc.metadata_json,embedding=vector))
+ doc.content=content
+ db.add(Audit(tenant_id='luxuryvillas',action='document.refresh',metadata_json=json.dumps({'document_id':doc.id,'chunks':len(parts)})))
+ db.commit()
+print('Approved Luxury Villas knowledge refreshed; conversations preserved.')
+"""
+ subprocess.run(['docker','exec','luxuryvillas-olivia36','python','-c',script],check=True)
 else:raise SystemExit('Unknown provisioning phase')
