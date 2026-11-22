@@ -95,8 +95,8 @@ import Seo from "../../components/Seo.astro";
     .brand { display: inline-flex; align-items: center; gap: .8rem; width: max-content; }
     .brand-copy { font-size: .68rem; letter-spacing: .19em; line-height: 1.2; text-transform: uppercase; }
     .brand-copy small { display: block; font-size: .5rem; letter-spacing: .28em; margin-top: .3rem; opacity: .7; }
-    .site-header .brand-copy { font-size: 1.1492rem; }
-    .site-header .brand-copy small { font-size: .845rem; }
+    .site-header .brand-copy, .footer-brand .brand-copy { font-size: 1.1492rem; }
+    .site-header .brand-copy small, .footer-brand .brand-copy small { font-size: .845rem; }
     .main-nav { display: flex; justify-content: center; align-items: center; gap: clamp(1.4rem, 2.4vw, 2.8rem); font-size: .92rem; text-transform: uppercase; letter-spacing: .13em; }
     .main-nav a { position: relative; padding: .5rem 0; }
     .main-nav a::after {
@@ -276,7 +276,6 @@ import Seo from "../../components/Seo.astro";
     footer.site-footer { background: #101411; color: #deded8; padding: clamp(3.5rem, 6vw, 5rem) 7vw 2.4rem; }
     .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.6rem; padding-bottom: 2.4rem; }
     .footer-brand { display: flex; align-items: center; gap: .8rem; color: #fff; margin-bottom: 1rem; }
-    .footer-logo { width: 140px; height: auto; object-fit: contain; }
     footer p.tagline { line-height: 1.7; color: #8f948e; margin: 0; font-size: .78rem; }
     .footer-column { display: flex; flex-direction: column; gap: .6rem; font-size: .78rem; }
     .footer-contact { min-width: 0; overflow-wrap: anywhere; line-height: 1.7; }
@@ -533,8 +532,7 @@ import Seo from "../../components/Seo.astro";
     <div class="footer-top">
       <div>
         <div class="footer-brand">
-          <img class="footer-logo" src="/assets/responsive/logo-480.webp" srcset="/assets/responsive/logo-240.webp 240w, /assets/responsive/logo-480.webp 480w" sizes="180px" alt="La Casa Que Canta" />
-          <span class="brand-copy">Luxury Villas<small>Zihuatanejo</small></span>
+          <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
         </div>
         <p class="tagline">Luxury Villas privadas sobre Playa La Ropa<br />Zihuatanejo, Guerrero, México</p>
       </div>
