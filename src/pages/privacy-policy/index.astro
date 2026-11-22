@@ -1,4 +1,5 @@
 ---
+import BrandLogo from '../../components/BrandLogo.astro';
 import FooterKeywords from "../../components/FooterKeywords.astro";
 import Seo from "../../components/Seo.astro";
 ---
@@ -69,11 +70,7 @@ import Seo from "../../components/Seo.astro";
       backdrop-filter: blur(16px);
       border-color: rgba(255,255,255,.12);
     }
-    .brand { display: inline-flex; align-items: center; gap: .8rem; width: max-content; }
-    .brand-copy { font-size: .68rem; letter-spacing: .19em; line-height: 1.2; text-transform: uppercase; }
-    .brand-copy small { display: block; font-size: .5rem; letter-spacing: .28em; margin-top: .3rem; opacity: .7; }
-    .site-header .brand-copy, .footer-brand .brand-copy { font-size: 1.1492rem; }
-    .site-header .brand-copy small, .footer-brand .brand-copy small { font-size: .845rem; }
+    .brand { display: block; width: clamp(220px, 30vw, 320px); max-width: calc(100vw - 110px); }
     .main-nav { display: flex; justify-content: center; align-items: center; gap: clamp(1.4rem, 2.4vw, 2.8rem); font-size: .92rem; text-transform: uppercase; letter-spacing: .13em; }
     .main-nav a { position: relative; padding: .5rem 0; }
     .main-nav a::after {
@@ -252,7 +249,7 @@ import Seo from "../../components/Seo.astro";
     /* Footer */
     footer.site-footer { background: #101411; color: #deded8; padding: clamp(3.5rem, 6vw, 5rem) 7vw 2.4rem; }
     .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.6rem; padding-bottom: 2.4rem; }
-    .footer-brand { display: flex; align-items: center; gap: .8rem; color: #fff; margin-bottom: 1rem; }
+    .footer-brand { width: 100%; max-width: 320px; margin-bottom: 1rem; }
     footer p.tagline { line-height: 1.7; color: #8f948e; margin: 0; font-size: .78rem; }
     .footer-column { display: flex; flex-direction: column; gap: .6rem; font-size: .78rem; }
     .footer-contact { min-width: 0; overflow-wrap: anywhere; line-height: 1.7; }
@@ -288,6 +285,7 @@ import Seo from "../../components/Seo.astro";
 
     @media (max-width: 760px) {
       .site-header { grid-template-columns: 1fr auto; padding: 1.1rem; }
+      .brand { width: min(270px, calc(100vw - 110px)); }
       .main-nav, .language { display: none; }
       .menu-button { display: inline-block; }
       .hero-content { padding: 0 1.3rem 4.5rem; }
@@ -354,7 +352,7 @@ import Seo from "../../components/Seo.astro";
 <body id="top">
   <header class="site-header" id="header">
     <a class="brand" href="/#top" aria-label="Luxury Villas by La Casa Que Canta home">
-      <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
+      <BrandLogo />
     </a>
     <nav class="main-nav" aria-label="Main navigation">
       <a href="/#villas">The Luxury Villas</a>
@@ -379,7 +377,7 @@ import Seo from "../../components/Seo.astro";
     <div class="footer-top">
       <div>
         <div class="footer-brand">
-          <span class="brand-copy">Luxury Villas<small>by la Casa que Canta</small></span>
+          <BrandLogo />
         </div>
         <p class="tagline">Private Luxury Villas above Playa La Ropa<br />Zihuatanejo, Guerrero, México</p>
       </div>
