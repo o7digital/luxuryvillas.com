@@ -1,0 +1,21 @@
+<!-- Match the supplied artwork's existing 103 54 946 147 crop. -->
+<span class="brand-logo header-logo" role="img" aria-label="Luxury Villas by La Casa Que Canta">
+  <span class="header-logo-white" aria-hidden="true"></span>
+  <img class="header-logo-colour" src="/assets/luxury-villas-logo.png" width="1152" height="255" alt="" aria-hidden="true" />
+</span>
+<style>
+  .header-logo { position: relative; display: block; width: 75%; aspect-ratio: 946 / 147; overflow: hidden; }
+  .header-logo-white, .header-logo-colour { transition: opacity .4s ease; }
+  .header-logo-white {
+    position: absolute; inset: 0; background: #fff;
+    -webkit-mask-image: url('/assets/luxury-villas-logo.png');
+    mask-image: url('/assets/luxury-villas-logo.png');
+    -webkit-mask-size: 121.7758985% auto; mask-size: 121.7758985% auto;
+    -webkit-mask-position: center; mask-position: center;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  .header-logo-colour { position: absolute; top: 50%; left: 50%; width: 121.7758985%; max-width: none; height: auto; transform: translate(-50%, -50%); opacity: 0; }
+  :global(#header.is-scrolled) .header-logo-white { opacity: 0; }
+  :global(#header.is-scrolled) .header-logo-colour { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .header-logo-white, .header-logo-colour { transition: none; } }
+</style>
