@@ -8,11 +8,12 @@ interface Props {
 }
 const { title, description, path, lang, localized = false } = Astro.props;
 const canonical = new URL(path, Astro.site).href;
-const image = new URL('/assets/hero-playa-la-ropa.webp', Astro.site).href;
+const image = new URL('/assets/responsive/home-beach-1920.webp', Astro.site).href;
 const imageAlt = lang === 'es' ? 'Playa La Ropa y la costa de Zihuatanejo, México' : 'Playa La Ropa and the coastline of Zihuatanejo, Mexico';
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href={canonical} />
 {localized && <>
   <link rel="alternate" hreflang="en" href={new URL('/', Astro.site).href} />
@@ -28,8 +29,8 @@ const imageAlt = lang === 'es' ? 'Playa La Ropa y la costa de Zihuatanejo, Méxi
 {localized && <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_MX'} />}
 <meta property="og:image" content={image} />
 <meta property="og:image:type" content="image/webp" />
-<meta property="og:image:width" content="2000" />
-<meta property="og:image:height" content="1125" />
+<meta property="og:image:width" content="1920" />
+<meta property="og:image:height" content="1072" />
 <meta property="og:image:alt" content={imageAlt} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />

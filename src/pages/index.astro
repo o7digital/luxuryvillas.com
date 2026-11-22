@@ -1,8 +1,11 @@
 ---
+import HomeStructuredData from '../components/HomeStructuredData.astro';
+import { homeSeo } from '../data/home-seo';
 import BrandLogo from '../components/BrandLogo.astro';
 import ContactForm from '../components/ContactForm.astro';
 import FooterKeywords from "../components/FooterKeywords.astro";
 import Seo from "../components/Seo.astro";
+const seo = homeSeo.en;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,29 +23,11 @@ import Seo from "../components/Seo.astro";
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <Seo title="Luxury Villas in Zihuatanejo | La Casa Que Canta" description="Explore private Luxury Villa rentals in Zihuatanejo on Playa La Ropa. Discover El Ensueño and El Murmullo by La Casa Que Canta, each welcoming up to 8 guests." path="/" lang="en" localized={true} />
+  <Seo {...seo} path="/" lang="en" localized={true} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
-  <script is:inline type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LodgingBusiness",
-      "name": "Luxury Villas by La Casa Que Canta",
-      "description": "Explore private Luxury Villa rentals in Zihuatanejo on Playa La Ropa. Discover El Ensueño and El Murmullo by La Casa Que Canta, each welcoming up to 8 guests.",
-      "url": "https://www.luxuryvillasbylacasaquecanta.com/",
-      "@id": "https://www.luxuryvillasbylacasaquecanta.com/#luxury-villas",
-      "image": "https://www.luxuryvillasbylacasaquecanta.com/assets/hero-playa-la-ropa.webp",
-      "telephone": "+52 755 555 7000",
-      "email": "sales.reservations@lacasaquecanta.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Zihuatanejo",
-        "addressRegion": "Guerrero",
-        "addressCountry": "MX"
-      }
-    }
-  </script>
+  <HomeStructuredData lang="en" />
   <style is:inline>
     :root {
       --ink: #151914;
@@ -141,11 +126,11 @@ import Seo from "../components/Seo.astro";
     }
     .eyebrow { text-transform: uppercase; letter-spacing: .27em; font-size: .68rem; margin: 0 0 1.5rem; color: #ebd4a4; }
     .eyebrow.dark { color: #9b7d45; }
-    .hero h1, .intro h2, .section-head h2, .immersive h2, .manifesto h2, .contact h2 {
+    .hero .hero-title, .intro h1, .section-head h2, .immersive h2, .manifesto h2, .contact h2 {
       font-family: var(--serif); font-weight: 500; letter-spacing: -.045em; margin: 0; line-height: .94;
     }
-    .hero h1 { font-size: clamp(3.6rem, 8vw, 7.6rem); max-width: 1000px; text-shadow: 0 20px 45px rgba(0,0,0,.2); }
-    .hero h1 em, .intro h2 em, .section-head h2 em, .immersive h2 em, .manifesto h2 em, .contact h2 em { font-style: italic; }
+    .hero .hero-title { font-size: clamp(3.6rem, 8vw, 7.6rem); max-width: 1000px; text-shadow: 0 20px 45px rgba(0,0,0,.2); }
+    .hero .hero-title em, .intro h1 em, .section-head h2 em, .immersive h2 em, .manifesto h2 em, .contact h2 em { font-style: italic; }
     .hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-top: 2.1rem; max-width: 1080px; flex-wrap: wrap; }
     .hero-bottom p { font-size: .95rem; line-height: 1.6; font-weight: 400; max-width: 30rem; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
     .hero .eyebrow { color: #fff; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
@@ -179,7 +164,7 @@ import Seo from "../components/Seo.astro";
     /* Intro/story */
     .intro { padding: clamp(5rem, 9vw, 7.5rem) 7vw clamp(4rem, 7vw, 5.6rem); display: grid; grid-template-columns: .35fr 1.45fr .8fr; gap: 4vw; }
     .intro-index { font-family: var(--serif); font-size: .9rem; color: #9f8e70; }
-    .intro h2 { font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
+    .intro h1 { font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
     .intro-text { padding-top: 3.4rem; }
     .intro-text p { font-family: var(--serif); font-size: 1.15rem; line-height: 1.55; color: #484b44; margin: 0; }
     .text-link { margin-top: 1.4rem; display: inline-flex; gap: 1.2rem; text-transform: uppercase; font-size: .64rem; letter-spacing: .18em; border-bottom: 1px solid #b3a486; padding-bottom: .5rem; }
@@ -388,7 +373,7 @@ import Seo from "../components/Seo.astro";
       <div class="hero-shade"></div>
       <div class="hero-content">
         <p class="eyebrow" data-reveal>Luxury Villas - Zihuatanejo</p>
-        <h1 data-reveal>Where the Pacific<br /><em>becomes yours.</em></h1>
+        <p class="hero-title" data-reveal>Where the Pacific<br /><em>becomes yours.</em></p>
         <div class="hero-bottom">
           <p data-reveal="right">Private oceanfront residences on Playa La Ropa, created for extraordinary escapes.</p>
           <div class="hero-ctas" data-reveal="right">
@@ -406,7 +391,7 @@ import Seo from "../components/Seo.astro";
       <div class="intro-index" aria-hidden="true">01</div>
       <div data-reveal>
         <p class="eyebrow dark">A private side of La Casa Que Canta</p>
-        <h2>Luxury Villas in Zihuatanejo.<br /><em>One unforgettable coast.</em></h2>
+        <h1>Luxury Villas in Zihuatanejo.<br /><em>One unforgettable coast.</em></h1>
       </div>
       <div class="intro-text" data-reveal="right">
         <p>Our private Luxury Villas on Playa La Ropa offer two ways to experience Zihuatanejo: beachfront living at El Ensueño and ocean views above the bay at El Murmullo.</p>
@@ -436,7 +421,7 @@ import Seo from "../components/Seo.astro";
       </div>
 
       <div class="villa-grid">
-        <article class="villa-card" data-reveal>
+        <article class="villa-card" id="el-ensueno" data-reveal>
           <div class="villa-image">
             <img src="/assets/responsive/el-ensueno-main-1280.webp" srcset="/assets/responsive/el-ensueno-main-640.webp 640w, /assets/responsive/el-ensueno-main-1280.webp 1280w, /assets/responsive/el-ensueno-main-1366.webp 1366w" sizes="(max-width: 1100px) 100vw, 50vw" width="1366" height="900" alt="El Ensueño Luxury Villa in Zihuatanejo" loading="lazy" decoding="async" />
             <div class="villa-overlay"></div>
@@ -461,7 +446,7 @@ import Seo from "../components/Seo.astro";
           </div>
         </article>
 
-        <article class="villa-card" data-reveal>
+        <article class="villa-card" id="el-murmullo" data-reveal>
           <div class="villa-image">
             <img src="/assets/responsive/el-murmullo-main-1280.webp" srcset="/assets/responsive/el-murmullo-main-640.webp 640w, /assets/responsive/el-murmullo-main-1280.webp 1280w, /assets/responsive/el-murmullo-main-1366.webp 1366w" sizes="(max-width: 1100px) 100vw, 50vw" width="1366" height="896" alt="El Murmullo Luxury Villa in Zihuatanejo" loading="lazy" decoding="async" />
             <div class="villa-overlay"></div>

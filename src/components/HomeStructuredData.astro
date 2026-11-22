@@ -1,0 +1,90 @@
+---
+import { homeSeo, villas } from '../data/home-seo';
+
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const home = absolute('/');
+const page = absolute(lang === 'es' ? '/es/' : '/');
+const organizationId = `${home}#luxury-villas`;
+const websiteId = `${home}#website`;
+const pageId = `${page}#webpage`;
+const listId = `${page}#villa-collection`;
+const brand = 'Luxury Villas by La Casa Que Canta';
+const address = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Zihuatanejo',
+  addressRegion: 'Guerrero',
+  addressCountry: 'MX',
+};
+const data = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: brand,
+      url: home,
+      logo: {
+        '@type': 'ImageObject',
+        contentUrl: absolute('/assets/luxury-villas-logo.png'),
+        width: 1152,
+        height: 255,
+      },
+      telephone: '+52 755 555 7000',
+      email: 'sales.reservations@lacasaquecanta.com',
+      address,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      name: brand,
+      url: home,
+      inLanguage: ['en', 'es'],
+      publisher: { '@id': organizationId },
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': pageId,
+      url: page,
+      name: homeSeo[lang].title,
+      description: homeSeo[lang].description,
+      inLanguage: lang,
+      isPartOf: { '@id': websiteId },
+      publisher: { '@id': organizationId },
+      mainEntity: { '@id': listId },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: absolute('/assets/responsive/home-beach-1920.webp'),
+        width: 1920,
+        height: 1072,
+      },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': listId,
+      name: lang === 'es' ? 'El Ensueño y El Murmullo' : 'El Ensueño and El Murmullo',
+      numberOfItems: villas.length,
+      itemListElement: villas.map((villa, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${page}#${villa.slug}`,
+        item: { '@id': `${home}#${villa.slug}` },
+      })),
+    },
+    ...villas.map(villa => ({
+      '@type': 'LodgingBusiness',
+      '@id': `${home}#${villa.slug}`,
+      name: villa.name,
+      url: villa.url,
+      description: villa[lang].description,
+      image: absolute(villa.image),
+      address,
+      brand: { '@type': 'Brand', name: 'La Casa Que Canta', url: 'https://www.lacasaquecanta.com/' },
+      numberOfRooms: { '@type': 'QuantitativeValue', value: 4, unitText: lang === 'es' ? 'suites privadas' : 'private suites' },
+      amenityFeature: villa[lang].amenities.map(name => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
+    })),
+  ],
+};
+---
+<script is:inline type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />

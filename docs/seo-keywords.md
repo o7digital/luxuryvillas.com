@@ -91,3 +91,15 @@ Footer keywords describe the collection in the plural. Keep property names
 as written. Singular strategy phrases are reserved for individual properties.
 English pages use the English list; `/es/` uses Spanish translations.
 The data lives in `src/data/footer-keywords.json`.
+
+## SEO implementation
+
+Homepage search titles and descriptions are maintained in `src/data/home-seo.ts`.
+The visible introduction is the descriptive H1; the hero slogan keeps its text
+and presentation. `HomeStructuredData.astro` describes the website, the bilingual
+collection pages and the two villas using published facts only. Do not add rates,
+ratings, availability or unconfirmed policies to this data.
+
+SEO edits must preserve the header and footer, the supplied transparent logo at
+its reduced size, the footer keyword lists and the removal of the WhatsApp and
+stay-planning buttons unless the user explicitly requests otherwise.
