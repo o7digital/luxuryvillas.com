@@ -11,27 +11,34 @@ const es = lang === 'es';
       button, input, textarea { font: inherit; } button, a { -webkit-tap-highlight-color: transparent; }
       button { cursor: pointer; } button:disabled { cursor: default; opacity: .5; }
       button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid #c8aa70; outline-offset: 3px; }
-      .toggle { display: grid; place-items: center; width: 64px; height: 64px; margin-left: auto; border-radius: 50%; background: linear-gradient(135deg, #3d3932, #171512); color: white; border: 1px solid #c8aa7070; box-shadow: 0 18px 40px -16px #0009, inset 0 1px 0 #ffffff30; }
+      .toggle { display: flex; align-items: center; gap: 16px; height: 64px; margin-left: auto; padding: 7px 7px 7px 21px; border-radius: 40px; background: linear-gradient(135deg, #3d3932, #171512); color: white; border: 1px solid #c8aa7070; box-shadow: 0 18px 40px -16px #0009, inset 0 1px 0 #ffffff30; transition: transform .2s ease, box-shadow .2s ease; }
+      .toggle-copy { display: grid; gap: 1px; text-align: left; }
+      .toggle-name { font-size: 15px; font-weight: 500; letter-spacing: .02em; }
+      .toggle-description { font-size: 10px; color: #e0c899; letter-spacing: .025em; }
+      .toggle-icon { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid #c8aa7050; border-radius: 50%; background: #ffffff08; color: #efd9ad; }
+      .toggle[aria-expanded="true"] { width: 64px; padding: 7px; justify-content: center; }
+      .toggle[aria-expanded="true"] .toggle-copy { display: none; }
       svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
       .panel { position: absolute; bottom: 84px; right: 0; display: flex; flex-direction: column; width: 430px; max-width: calc(100vw - 32px); height: min(700px, calc(100dvh - 130px)); border: 1px solid #ded7c9; border-radius: 28px; background: #fffdf8; overflow: hidden; box-shadow: 0 46px 78px -28px #14100ac7, 0 22px 38px -26px #14100aa3, inset 0 1px 0 #ffffffcc; animation: enter .22s ease-out; }
       header { display: flex; align-items: flex-start; gap: 12px; padding: 20px; color: white; background: #2b2b2b; border-bottom: 1px solid #c8aa70; }
-      .avatar { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 50%; background: #ffffff15; border: 1px solid #ffffff26; color: #f4d99a; }
+      .avatar { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 50%; background: linear-gradient(145deg, #c8aa702b, #ffffff08); border: 1px solid #c8aa7060; color: #f4d99a; }
       h2 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
       .brand { margin: 2px 0 7px; font-size: 11px; color: #ffffffb3; }
       .status { display: inline-flex; align-items: center; gap: 7px; border-radius: 20px; background: #ffffff15; padding: 3px 9px; font-size: 11px; }
       .dot { width: 7px; height: 7px; border-radius: 50%; background: #c8aa70; }
       .close { margin-left: auto; border: 0; border-radius: 50%; width: 30px; height: 30px; color: white; background: #ffffff15; font-size: 22px; line-height: 1; }
-      .messages { flex: 1; min-height: 100px; overflow-y: auto; padding: 20px 16px; background: #f7f2e9; display: flex; flex-direction: column; gap: 12px; overscroll-behavior: contain; }
+      .messages { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 16px; background: #f7f2e9; display: flex; flex-direction: column; gap: 12px; overscroll-behavior: contain; }
       .message { flex: none; max-width: 90%; padding: 12px 15px; margin: 0; border-radius: 18px 18px 18px 4px; background: white; box-shadow: 0 2px 8px #14100a0a; white-space: pre-wrap; overflow-wrap: anywhere; }
       .user { align-self: flex-end; background: #2b2b2b; color: white; border-radius: 18px 18px 4px 18px; }
       .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px; background: #f7f2e9; }
-      .actions button { background: transparent; border: 1px solid #c8aa70; color: #5f5546; border-radius: 10px; font-size: 11px; font-weight: 600; padding: 8px 6px; }
+      .actions button { background: transparent; border: 1px solid #c8aa70; color: #5f5546; border-radius: 10px; font-size: 11px; font-weight: 600; padding: 8px 6px; transition: background .2s ease, border-color .2s ease; }
       .consent { padding: 10px 16px; font-size: 11px; border-top: 1px solid #e8e0d3; background: #fffdf8; }
       .consent label { display: flex; align-items: flex-start; gap: 8px; } .consent input { accent-color: #2b2b2b; margin-top: 4px; }
       a { color: #806839; text-underline-offset: 3px; } .contact { display: flex; justify-content: space-between; padding: 0 16px 10px; font-size: 11px; }
       .chat-form { padding: 12px 16px; display: flex; gap: 8px; border-top: 1px solid #ded7c9; background: #fffdf8; }
       .chat-form input { min-width: 0; width: 100%; border-radius: 12px; border: 1px solid #ded7c9; background: white; padding: 12px; color: #2b2b2b; }
-      .open-contact { padding: 0; border: 0; background: transparent; color: #806839; text-decoration: underline; text-underline-offset: 3px; }
+      .open-contact { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 8px 12px; border: 1px solid #ded2bb; border-radius: 10px; background: #f7f2e9; color: #5f4a25; text-align: left; transition: background .2s ease; }
+      .open-contact svg { width: 16px; height: 16px; flex: none; }
       .lead-view { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; }
       .lead-view h3 { margin: 0 0 8px; font-size: 17px; }
       .lead-view > p { margin: 0 0 14px; font-size: 12px; color: #625b51; }
@@ -46,9 +53,17 @@ const es = lang === 'es';
       .send { display: grid; place-items: center; border: none; border-radius: 12px; background: #2b2b2b; color: white; width: 46px; flex: none; }
       .error { margin: 0; padding: 7px 16px; background: #fff0e9; color: #85402c; font-size: 12px; }
       .footnote { padding: 0 16px 9px; font-size: 10px; color: #8b8275; text-align: center; }
+      .typing { display: flex; align-items: center; gap: 5px; padding: 16px; }
+      .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #9a7c44; animation: reply 1.2s ease-in-out infinite; }
+      .typing-dot + .typing-dot { animation-delay: .15s; } .typing-dot + .typing-dot + .typing-dot { animation-delay: .3s; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+      @keyframes reply { 0%, 60%, 100% { opacity: .4; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
       @keyframes enter { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+      @media (hover: hover) { .toggle:hover { transform: translateY(-2px); box-shadow: 0 22px 44px -16px #000b, inset 0 1px 0 #ffffff30; } .actions button:hover:not(:disabled) { background: #eadfc9; border-color: #a88b55; } .open-contact:hover:not(:disabled) { background: #eadfc9; } }
       @media (max-width: 600px) { :host { right: 16px; bottom: 16px; } .panel { position: fixed; right: 12px; left: 12px; bottom: 92px; width: auto; max-width: none; height: min(660px, calc(100dvh - 110px)); border-radius: 24px; } header { padding: 16px; } .messages { padding: 16px; } }
-      @media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
+      @media (max-height: 650px) { .panel { position: fixed; right: 12px; bottom: 12px; height: calc(100dvh - 24px); } .toggle[aria-expanded="true"] { visibility: hidden; } header { padding: 14px; } .actions { display: flex; overflow-x: auto; flex-shrink: 0; padding: 8px 16px; } .actions button { flex: none; white-space: nowrap; } }
+      @media (max-height: 450px) { .brand, .status, .footnote, .actions { display: none; } header { align-items: center; padding: 10px 16px; } .consent { padding: 6px 16px; font-size: 10px; } .chat-form { padding: 8px 16px; } }
+      @media (prefers-reduced-motion: reduce) { .panel, .typing-dot { animation: none; } .toggle, .actions button, .open-contact { transition: none; } .toggle:hover { transform: none; } }
     </style>
     <section class="panel" role="dialog" aria-labelledby="olivia-title" hidden>
       <header>
@@ -76,12 +91,12 @@ const es = lang === 'es';
         </form>
       </section>
       <div class="consent"><label><input type="checkbox" /><span>{es ? 'He leído y acepto el ' : 'I have read and accept the '}<a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">{es ? 'Aviso de Privacidad' : 'Privacy Notice'}</a>{es ? ' para conversar con Olivia. Al enviar una consulta, comparto mis datos y mi conversación con reservaciones.' : ' to chat with Olivia. When I send an enquiry, I share my details and conversation with reservations.'}</span></label></div>
-      <div class="contact"><button class="open-contact" type="button">{es ? 'Enviar una consulta a reservaciones' : 'Send an enquiry to reservations'}</button></div>
+      <div class="contact"><button class="open-contact" type="button"><span>{es ? 'Enviar una consulta a reservaciones' : 'Send an enquiry to reservations'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
       <p class="error" role="alert" hidden></p>
       <form class="chat-form"><input type="text" aria-label={es ? 'Tu mensaje' : 'Your message'} placeholder={es ? 'Escribe tu pregunta…' : 'Ask your question…'} maxlength="2000" disabled /><button class="send" type="submit" aria-label={es ? 'Enviar' : 'Send'} disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form>
       <div class="footnote">{es ? 'Disponibilidad y tarifas confirmadas por reservas.' : 'Availability and rates confirmed by reservations.'}</div>
     </section>
-    <button class="toggle" type="button" aria-label={es ? 'Abrir Olivia AI' : 'Open Olivia AI'} aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></button>
+    <button class="toggle" type="button" aria-label={es ? 'Abrir Olivia AI, tu concierge de villas' : 'Open Olivia AI, your villa concierge'} aria-expanded="false"><span class="toggle-copy"><span class="toggle-name">Olivia AI</span><span class="toggle-description">{es ? 'Tu concierge de villas' : 'Your villa concierge'}</span></span><span class="toggle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></span></button>
   </template>
 </luxury-olivia>
 <script>
@@ -94,6 +109,7 @@ const es = lang === 'es';
       root.append(template.content.cloneNode(true));
       const panel = root.querySelector<HTMLElement>('.panel')!;
       const toggle = root.querySelector<HTMLButtonElement>('.toggle')!;
+      const openLabel = toggle.getAttribute('aria-label')!;
       const input = root.querySelector<HTMLInputElement>('.chat-form input')!;
       const consent = root.querySelector<HTMLInputElement>('.consent input')!;
       const form = root.querySelector<HTMLFormElement>('.chat-form')!;
@@ -120,7 +136,7 @@ const es = lang === 'es';
         const p = document.createElement('p'); p.className = user ? 'message user' : 'message'; p.textContent = text;
         messages.append(p); messages.scrollTop = messages.scrollHeight; return p;
       };
-      addMessage(es ? 'Hola, soy Olivia, tu concierge digital. Te ayudo a descubrir El Ensueño y El Murmullo y a planear tu estancia en Playa La Ropa. ¿Qué te gustaría saber?' : 'Hello, I’m Olivia, your digital concierge. I can help you discover El Ensueño and El Murmullo and plan your stay on Playa La Ropa. What would you like to know?');
+      addMessage(es ? 'Hola, soy Olivia, tu concierge de villas. ¿Frente al mar en El Ensueño o sobre la bahía en El Murmullo? Cuéntame cómo imaginas tu estancia; te ayudo a descubrir las villas y a contactar a reservaciones.' : 'Hello, I’m Olivia, your villa concierge. Beachfront at El Ensueño or above the bay at El Murmullo? Tell me what your ideal stay looks like. I can help you explore the villas and connect with reservations.');
       const update = () => {
         input.disabled = !consent.checked || busy || leadBusy; sendButton.disabled = input.disabled;
         actions.forEach(button => { button.disabled = input.disabled; });
@@ -134,8 +150,8 @@ const es = lang === 'es';
       };
       openContact.addEventListener('click', () => showLead(true));
       back.addEventListener('click', () => showLead(false));
-      const close = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
-      toggle.addEventListener('click', () => { if (!panel.hidden) return close(); panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); (consent.checked ? (leadView.hidden ? input : leadName) : consent).focus(); });
+      const close = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', openLabel); toggle.focus(); };
+      toggle.addEventListener('click', () => { if (!panel.hidden) return close(); panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); toggle.setAttribute('aria-label', es ? 'Cerrar Olivia AI' : 'Close Olivia AI'); (consent.checked ? (leadView.hidden ? input : leadName) : consent).focus(); });
       root.querySelector('.close')!.addEventListener('click', close);
       root.addEventListener('keydown', (event) => { if ((event as KeyboardEvent).key === 'Escape' && !panel.hidden) close(); });
       consent.addEventListener('change', update); update();
@@ -143,14 +159,16 @@ const es = lang === 'es';
         if (!consent.checked || busy || !text.trim()) return;
         text = text.trim(); busy = true; update(); error.hidden = true;
         addMessage(text, true); lastUserMessage = text; input.value = '';
-        const pending = addMessage(es ? 'Un momento…' : 'One moment…');
+        const pending = addMessage(''); pending.classList.add('typing');
+        const replyLabel = document.createElement('span'); replyLabel.className = 'sr-only'; replyLabel.textContent = es ? 'Olivia está respondiendo…' : 'Olivia is replying…'; pending.append(replyLabel);
+        for (let index = 0; index < 3; index++) { const dot = document.createElement('span'); dot.className = 'typing-dot'; dot.setAttribute('aria-hidden', 'true'); pending.append(dot); }
         messages.setAttribute('aria-busy', 'true');
         try {
           const response = await fetch('/api/olivia/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, language: es ? 'es' : 'en', conversation, consent: true }), signal: AbortSignal.timeout(60000) });
           if (!response.ok) throw new Error(String(response.status));
           const data = await response.json();
           if (typeof data.answer !== 'string' || typeof data.conversation !== 'string') throw new Error('Invalid response');
-          pending.textContent = data.answer; conversation = data.conversation; this.dataset.version = data.version;
+          pending.classList.remove('typing'); pending.textContent = data.answer; conversation = data.conversation; this.dataset.version = data.version;
         } catch (err) {
           pending.remove(); input.value = text;
           error.textContent = (err as Error).message === '429' ? (es ? 'Demasiados mensajes. Espera un minuto e inténtalo de nuevo.' : 'Too many messages. Wait a minute and try again.') : (es ? 'Olivia no está disponible ahora. Inténtalo de nuevo o contacta al equipo de reservas.' : 'Olivia is unavailable right now. Try again or contact reservations.');
