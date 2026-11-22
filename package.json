@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "test:seo": "node scripts/check-seo.mjs",
-    "test:olivia": "node scripts/check-olivia-function.mjs"
+    "test:olivia": "node --test scripts/olivia-gateway.test.mjs && node scripts/check-olivia-function.mjs"
   },
   "dependencies": {
     "@astrojs/vercel": "11.0.12",

@@ -1,5 +1,52 @@
 name: luxuryvillas-olivia
 services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: luxuryvillas-olivia36-db
+    restart: unless-stopped
+    env_file: .env.db
+    volumes: [database:/var/lib/postgresql/data]
+    networks: [private]
+    mem_limit: 384m
+    cpus: 0.5
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U postgres -d luxuryvillas']
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  core:
+    # Private o7digital/olivia-v3 source at the visitor-language 3.6 release.
+    image: luxuryvillas-olivia36-core:9286428
+    container_name: luxuryvillas-olivia36
+    restart: unless-stopped
+    env_file: .env.core
+    depends_on:
+      postgres: {condition: service_healthy}
+    volumes: [./site-instructions.txt:/app/site-instructions.txt:ro]
+    networks: [private, egress]
+    mem_limit: 512m
+    cpus: 1
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://localhost:8093/health", timeout=5)']
+      interval: 10s
+      timeout: 6s
+      retries: 10
+  worker:
+    image: luxuryvillas-olivia36-core:9286428
+    container_name: luxuryvillas-olivia36-worker
+    restart: unless-stopped
+    command: [python, -m, app.worker]
+    env_file: [.env.core, .env.worker]
+    depends_on:
+      core: {condition: service_healthy}
+    networks: [private, egress]
+    mem_limit: 256m
+    cpus: 0.5
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://core:8093/ready", timeout=5)']
+      interval: 15s
+      timeout: 6s
+      retries: 10
   gateway:
     image: node:24-alpine
     container_name: luxuryvillas-olivia-gateway
@@ -7,8 +54,10 @@ services:
     working_dir: /app
     command: [node, gateway.mjs]
     env_file: .env
-    volumes: [./gateway.mjs:/app/gateway.mjs:ro, ./knowledge.txt:/app/knowledge.txt:ro]
-    networks: [o7-apps, v3]
+    volumes: [./gateway.mjs:/app/gateway.mjs:ro]
+    depends_on:
+      core: {condition: service_healthy}
+    networks: [o7-apps, private]
     read_only: true
     user: node
     cap_drop: [ALL]
@@ -17,13 +66,12 @@ services:
     cpus: 0.5
     healthcheck:
       test: [CMD, node, -e, 'fetch("http://localhost:3098/health").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))']
-      interval: 30s
-      timeout: 5s
-      retries: 3
+      interval: 15s
+      timeout: 6s
+      retries: 5
 networks:
-  o7-apps:
-    external: true
-    name: o7-apps
-  v3:
-    external: true
-    name: olivia-v3_olivia-v3-internal
+  o7-apps: {external: true, name: o7-apps}
+  private: {internal: true}
+  egress: {}
+volumes:
+  database: {}

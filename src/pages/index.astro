@@ -3,6 +3,7 @@ import HomeStructuredData from '../components/HomeStructuredData.astro';
 import { homeSeo } from '../data/home-seo';
 import BrandLogo from '../components/BrandLogo.astro';
 import ContactForm from '../components/ContactForm.astro';
+import OliviaAI from '../components/OliviaAI.astro';
 import FooterKeywords from "../components/FooterKeywords.astro";
 import Seo from "../components/Seo.astro";
 const seo = homeSeo.en;
@@ -629,5 +630,6 @@ const seo = homeSeo.en;
     if (yearNode) yearNode.textContent = new Date().getFullYear();
   </script>
 
+  <OliviaAI lang="en" />
 </body>
 </html>
