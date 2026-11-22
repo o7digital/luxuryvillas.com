@@ -5,7 +5,7 @@ export function todayInZihuatanejo(now = new Date()) {
 
 export function isEnquiryIntent(message) {
   const text = message.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  return /\b(info(?:s|rmation|rmations|rmacion|rmacoes)?|details|renseignements|devis|quotes?|quotations?|cotiz(?:acion|ar)|rates?|prices?|pricing|costs?|tarif(?:s|a|as)?|precios?|available|availability|disponibil(?:ity|ites?|idad)|whatsapp|reserv(?:e|er|ation|ations|ar|a|as))\b/.test(text)
+  return /\b(info(?:s|rmation|rmations|rmacion|rmacoes)?|details|renseignements|devis|quotes?|quotations?|cotiz(?:acion|ar)|rates?|prices?|pricing|costs?|tarif(?:s|a|as)?|precios?|available|availability|disponibles?|disponibil(?:ity|ites?|idad)|bookings?|whatsapp|reserv(?:e|er|ation|ations|ar|a|as))\b/.test(text)
     || /\b(contact|call|llama|llame|appelez)[ -]?(me|us|moi|nos|your|reservations)\b/.test(text)
     || /\b(how much|combien|cuanto|cuesta|tell me more)\b/.test(text)
     || /\b(would like|want|looking|interested|quisiera|quiero|busco|me interesa|souhaite|aimerais|voudrais)\b.{0,50}\b(stay|villa|sejour|estancia|alojar|hospedar)\b/.test(text)
