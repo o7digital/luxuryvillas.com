@@ -1,5 +1,4 @@
 ---
-import WhatsAppButton from "./WhatsAppButton.astro";
 const { lang = 'en' } = Astro.props;
 const es = lang === 'es';
 const copy = es ? {
@@ -21,7 +20,6 @@ const copy = es ? {
     <p class="eyebrow">{copy.label}</p>
     <h2 id="contact-title">{copy.title}</h2>
     <p class="intro-copy">{copy.intro}</p>
-    <WhatsAppButton lang={es ? "es" : "en"} />
   </div>
   <form class="enquiry-form" action="https://formspree.io/f/moejlkyy" method="POST" data-sending={copy.sending} data-success={copy.success} data-error={copy.error}>
     <input type="hidden" name="_subject" value="Luxury Villas — Contact enquiry" />

@@ -1,5 +1,4 @@
 ---
-import WhatsAppButton from "../../components/WhatsAppButton.astro";
 import ContactForm from '../../components/ContactForm.astro';
 import FooterKeywords from "../../components/FooterKeywords.astro";
 import Seo from "../../components/Seo.astro";
@@ -106,8 +105,6 @@ import Seo from "../../components/Seo.astro";
     }
     .main-nav a:hover::after, .main-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
     .header-actions { display: flex; align-items: center; gap: 1.4rem; justify-self: end; }
-    .book-link { font-size: .88rem; text-transform: uppercase; letter-spacing: .13em; position: relative; }
-    .book-link span { color: var(--gold); font-size: 1rem; margin-left: .5rem; }
     .language { border: 0; background: none; color: inherit; cursor: pointer; font-size: .88rem; letter-spacing: .13em; text-transform: uppercase; opacity: .9; }
     .language span { opacity: .7; }
     .menu-button {
@@ -131,7 +128,6 @@ import Seo from "../../components/Seo.astro";
     }
     .mobile-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
     .mobile-nav a { padding: .9rem 0; font-family: var(--serif); font-size: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
-    .mobile-nav .book-link { margin-top: .6rem; font-family: var(--sans); font-size: .72rem; border-bottom: 0; }
 
     /* Hero */
     .hero { height: 100svh; min-height: 680px; position: relative; color: #fff; overflow: hidden; background: #18211e url("/assets/responsive/home-beach-1920.webp") center/cover no-repeat; }
@@ -275,7 +271,6 @@ import Seo from "../../components/Seo.astro";
     .contact-content { position: relative; z-index: 2; padding: 3rem 0; }
     .contact h2 { font-size: clamp(2.9rem, 7vw, 6.2rem); }
     .contact-content p.lead-copy { max-width: 32rem; margin: 1.4rem auto 2rem; font-family: var(--serif); font-size: 1.1rem; line-height: 1.5; color: rgba(255,255,255,.8); }
-    .contact-ctas { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; }
 
     /* Footer */
     footer.site-footer { background: #101411; color: #deded8; padding: clamp(3.5rem, 6vw, 5rem) 7vw 2.4rem; }
@@ -334,12 +329,12 @@ import Seo from "../../components/Seo.astro";
 
       .main-nav { gap: 1rem; font-size: .75rem; letter-spacing: .08em; }
       .header-actions { gap: .8rem; }
-      .book-link, .language { font-size: .75rem; }
+      .language { font-size: .75rem; }
     }
 
     @media (max-width: 760px) {
       .site-header { grid-template-columns: 1fr auto; padding: 1.1rem; }
-      .main-nav, .header-actions .book-link, .language { display: none; }
+      .main-nav, .language { display: none; }
       .menu-button { display: inline-block; }
       .hero-content { padding: 0 1.3rem 4.5rem; }
       .hero-bottom { align-items: flex-start; flex-direction: column; }
@@ -379,7 +374,6 @@ import Seo from "../../components/Seo.astro";
       <a href="#contact">Contacto</a>
     </nav>
     <div class="header-actions">
-      <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia <span aria-hidden="true">↗</span></a>
       <a class="language" href="/" aria-label="Change language">ES <span>⌄</span></a>
       <button class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav"></button>
     </div>
@@ -390,7 +384,6 @@ import Seo from "../../components/Seo.astro";
     <a href="#experience">La Experiencia</a>
     <a href="#story">Nuestra Historia</a>
       <a href="#contact">Contacto</a>
-    <a class="book-link" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia <span aria-hidden="true">↗</span></a>
   </nav>
 
   <main id="top">
@@ -403,7 +396,6 @@ import Seo from "../../components/Seo.astro";
           <p data-reveal="right">Residencias privadas frente al mar en Playa La Ropa, creadas para escapadas extraordinarias.</p>
           <div class="hero-ctas" data-reveal="right">
             <a class="btn btn-solid" href="#villas">Descubre nuestras Luxury Villas <span aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia</a>
           </div>
         </div>
       </div>
@@ -533,10 +525,6 @@ import Seo from "../../components/Seo.astro";
         <p class="eyebrow">Tu escapada privada te espera</p>
         <h2>Zihuatanejo te<br /><em>está esperando.</em></h2>
         <p class="lead-copy">Planea tu renta vacacional de lujo en Zihuatanejo. Nuestros especialistas en Luxury Villas te ayudan a elegir tu hogar privado en la zona de Ixtapa Zihuatanejo, en la costa del Pacífico mexicano.</p>
-        <div class="contact-ctas">
-          <a class="btn btn-solid" href="mailto:sales.reservations@lacasaquecanta.com">Planea tu estancia <span aria-hidden="true">→</span></a>
-          <WhatsAppButton lang="es" />
-        </div>
       </div>
     </section>
   </main>
