@@ -48,7 +48,7 @@ const es = lang === 'es';
       .lead-note { margin: 0; font-size: 11px; color: #625b51; }
       .lead-form input, .lead-form textarea { width: 100%; min-width: 0; border: 1px solid #bfb5a4; border-radius: 8px; padding: 9px; background: white; color: #2b2b2b; }
       .lead-form textarea { resize: vertical; min-height: 80px; }
-      .lead-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+      .lead-buttons { display: flex; flex-wrap: wrap; flex-shrink: 0; gap: 8px; padding: 10px 16px; border-top: 1px solid #e8e0d3; background: #fffdf8; }
       .lead-submit, .back-to-chat { border: 1px solid #c8aa70; border-radius: 8px; padding: 9px 12px; background: #2b2b2b; color: white; }
       .back-to-chat { background: transparent; color: #5f5546; }
       .lead-feedback { margin: 0; color: #85402c; font-size: 12px; }
@@ -84,7 +84,7 @@ const es = lang === 'es';
       <section class="lead-view" aria-labelledby="olivia-contact-title" hidden>
         <h3 id="olivia-contact-title">{es ? 'Solicitar información' : 'Request information'}</h3>
         <p>{es ? 'Tus datos y tu conversación se enviarán a nuestro equipo de reservaciones.' : 'Your details and conversation will be sent to our reservations team.'}</p>
-        <form class="lead-form">
+        <form class="lead-form" id="olivia-enquiry-form">
           <div class="lead-row">
             <label>{es ? 'Nombre' : 'First name'}<input name="firstName" autocomplete="given-name" required maxlength="100" /></label>
             <label>{es ? 'Apellido' : 'Last name'}<input name="lastName" autocomplete="family-name" required maxlength="100" /></label>
@@ -101,10 +101,10 @@ const es = lang === 'es';
           <p class="lead-note" id="olivia-phone-note">{es ? 'Indica al menos un número, con código de país. Puedes usar el mismo para móvil y WhatsApp.' : 'Provide at least one number, including the country code. You can use the same number for mobile and WhatsApp.'}</p>
           <label>{es ? 'Tu consulta' : 'Your enquiry'}<textarea name="message" rows="3" required maxlength="5000"></textarea></label>
           <p class="lead-feedback" role="status" aria-live="polite"></p>
-          <div class="lead-buttons"><button class="lead-submit" type="submit" disabled>{es ? 'Enviar consulta' : 'Send enquiry'}</button><button class="back-to-chat" type="button">{es ? 'Volver al chat' : 'Back to chat'}</button></div>
         </form>
       </section>
       <div class="consent"><label><input type="checkbox" /><span>{es ? 'He leído y acepto el ' : 'I have read and accept the '}<a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">{es ? 'Aviso de Privacidad' : 'Privacy Notice'}</a>{es ? ' para conversar con Olivia. Al enviar una consulta, comparto mis datos y mi conversación con reservaciones.' : ' to chat with Olivia. When I send an enquiry, I share my details and conversation with reservations.'}</span></label></div>
+      <div class="lead-buttons" hidden><button class="lead-submit" type="submit" form="olivia-enquiry-form" disabled>{es ? 'Enviar consulta' : 'Send enquiry'}</button><button class="back-to-chat" type="button">{es ? 'Volver al chat' : 'Back to chat'}</button></div>
       <div class="contact"><button class="open-contact" type="button"><span>{es ? 'Solicitar información' : 'Request information'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
       <p class="error" role="alert" hidden></p>
       <form class="chat-form"><input type="text" aria-label={es ? 'Tu mensaje' : 'Your message'} placeholder={es ? 'Escribe tu pregunta…' : 'Ask your question…'} maxlength="2000" disabled /><button class="send" type="submit" aria-label={es ? 'Enviar' : 'Send'} disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form>
@@ -139,6 +139,7 @@ const es = lang === 'es';
       const leadMessage = root.querySelector<HTMLTextAreaElement>('.lead-form [name="message"]')!;
       const leadFeedback = root.querySelector<HTMLElement>('.lead-feedback')!;
       const leadSubmit = root.querySelector<HTMLButtonElement>('.lead-submit')!;
+      const leadButtons = root.querySelector<HTMLElement>('.lead-buttons')!;
       const back = root.querySelector<HTMLButtonElement>('.back-to-chat')!;
       const openContact = root.querySelector<HTMLButtonElement>('.open-contact')!;
       const contact = root.querySelector<HTMLElement>('.contact')!;
@@ -177,7 +178,7 @@ const es = lang === 'es';
         leadForm.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach(field => { field.disabled = leadBusy; });
       };
       const showLead = (show: boolean) => {
-        leadView.hidden = !show; messages.hidden = show; actionSection.hidden = show; form.hidden = show; contact.hidden = show; error.hidden = true;
+        leadView.hidden = !show; leadButtons.hidden = !show; messages.hidden = show; actionSection.hidden = show; form.hidden = show; contact.hidden = show; error.hidden = true;
         if (show) { if (!leadMessage.value) leadMessage.value = lastUserMessage; leadName.focus(); } else input.focus();
       };
       openContact.addEventListener('click', () => showLead(true));
