@@ -1,15 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { isEnquiryIntent, normalizeEnquiry, todayInZihuatanejo } from '../infrastructure/olivia/enquiry.mjs';
-
-test('information and booking enquiries open the form in visitor languages', () => {
-  for (const message of ['I would like more information', 'Can you send me details?', 'What are your rates?', 'Is El Ensueño available?', 'I would like to book a villa', 'I would like to book', 'Can I make a booking?', 'How much is a stay?', 'Tell me more', 'Please contact me', 'Quisiera información sobre las villas', '¿Cuál es la disponibilidad?', '¿Está disponible El Ensueño?', 'Quiero reservar', 'Je voudrais des infos', 'Je souhaite un devis', 'Est-ce disponible ?', 'Quelles sont vos disponibilités ?', 'Appelez-moi sur WhatsApp']) {
-    assert.equal(isEnquiryIntent(message), true, message);
-  }
-  for (const message of ['Hello', 'How many guests can stay in each villa?', 'What is the difference between El Ensueño and El Murmullo?', 'Does El Ensueño have an infinity pool?', '¿Cuántas suites tiene cada villa?', 'Bonjour, où se trouvent les villas ?']) {
-    assert.equal(isEnquiryIntent(message), false, message);
-  }
-});
+import { normalizeEnquiry, todayInZihuatanejo } from '../infrastructure/olivia/enquiry.mjs';
 
 const details = { contactFormVersion: 2, firstName: ' Jane ', lastName: ' Visitor ', email: 'JANE@example.test', arrivalDate: '2027-03-12', departureDate: '', phone: '+1 555 0100', whatsapp: '' };
 const normalize = body => normalizeEnquiry(body, { today: '2026-11-22' });

@@ -11,10 +11,13 @@ stores the conversation in PostgreSQL.
 Browser → `POST /api/olivia/` → authenticated Luxury Villas gateway → private
 Olivia 3.6 `/v1/chat`. Chatting alone never sends a Formspree submission.
 
-Information, rates, availability and booking requests open the information
-form immediately. The availability action and “Request information” also
-open it directly. General villa questions continue through the AI chat.
-The visitor's request is kept in the form; earlier chat messages are attached
+Every chat message goes to Olivia, including information, rates, availability
+and booking questions. All suggested questions, including “Availability & rates”,
+receive a chat answer after consent. Only the visitor's explicit click on
+“Request information” opens the form. Olivia answers with approved information
+first, explains when reservations must confirm details and offers the form
+when the visitor wants a quote, to reserve or to be contacted.
+The visitor's latest request prefills the form; earlier chat messages are attached
 from the server when the visitor submits. Opening the form sends nothing.
 
 The form collects first and last name, arrival date, optional departure date,
@@ -67,7 +70,7 @@ bookings, execute visitor-requested tools or send WhatsApp messages.
 `OLIVIA_GATEWAY_KEY` is a sensitive, server-only Vercel production variable.
 The matching gateway key is in the private VPS `.env`. Provider credentials,
 service passwords and JWTs never go to the browser or this repository.
-Shared enquiry validation and intent rules in `infrastructure/olivia/enquiry.mjs`
+Shared enquiry validation rules in `infrastructure/olivia/enquiry.mjs`
 contain no credentials and are used by the browser, API and gateway. The
 gateway and API retain compatibility for older forms already open in a tab.
 Development uses the ignored `.env.local`. APIs allow exact production and
@@ -112,7 +115,7 @@ Run `npm run build`, `npm run test:seo` and `npm run test:olivia`. Gateway tests
 exercise separation of chat/contact, server-authoritative transcript,
 consent/authentication, rejection of older engines, delivery failures,
 retries, duplicate suppression, qualified contact fields, dates, phone/WhatsApp
-validation, information intent and rate limits. Those Formspree calls are
+validation, information questions staying in chat and rate limits. Those Formspree calls are
 mocked and send no messages. The packaged function is imported outside the
 workspace to detect missing runtime dependencies.
 

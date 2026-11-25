@@ -3,16 +3,6 @@ export function todayInZihuatanejo(now = new Date()) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Mexico_City', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 }
 
-export function isEnquiryIntent(message) {
-  const text = message.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  return /\b(info(?:s|rmation|rmations|rmacion|rmacoes)?|details|renseignements|devis|quotes?|quotations?|cotiz(?:acion|ar)|rates?|prices?|pricing|costs?|tarif(?:s|a|as)?|precios?|available|availability|disponibles?|disponibil(?:ity|ites?|idad)|bookings?|whatsapp|reserv(?:e|er|ation|ations|ar|a|as))\b/.test(text)
-    || /\b(contact|call|llama|llame|appelez)[ -]?(me|us|moi|nos|your|reservations)\b/.test(text)
-    || /\b(how much|combien|cuanto|cuesta|tell me more)\b/.test(text)
-    || /\b(would like|want|looking|interested|quisiera|quiero|busco|me interesa|souhaite|aimerais|voudrais)\b.{0,50}\b(stay|villa|sejour|estancia|alojar|hospedar)\b/.test(text)
-    || /\b(book|booking)\b.{0,20}\b(stay|villa|holiday|reservation)\b/.test(text)
-    || /\b(like|want|can i)\b.{0,20}\bbook\b/.test(text);
-}
-
 export function isPhoneNumber(value) {
   return typeof value === 'string' && /^\+?[\d\s().-]+$/.test(value) && value.replace(/\D/g, '').length >= 7 && value.replace(/\D/g, '').length <= 15 && value.length <= 60;
 }

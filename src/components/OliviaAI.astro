@@ -79,7 +79,7 @@ const es = lang === 'es';
         <button type="button" data-prompt={es ? '¿Cuál es la diferencia entre El Ensueño y El Murmullo?' : 'What is the difference between El Ensueño and El Murmullo?'}>{es ? 'Las villas' : 'The villas'}</button>
         <button type="button" data-prompt={es ? '¿Para cuántas personas es cada villa?' : 'How many guests can stay in each villa?'}>{es ? 'Suites y huéspedes' : 'Suites & guests'}</button>
         <button type="button" data-prompt={es ? '¿Qué servicios ofrece cada villa?' : 'What services does each villa offer?'}>{es ? 'Servicios' : 'Services'}</button>
-        <button type="button" data-enquiry data-prompt={es ? 'Quisiera información sobre disponibilidad y tarifas.' : 'I would like information about availability and rates.'}>{es ? 'Disponibilidad y tarifas' : 'Availability & rates'}</button>
+        <button type="button" data-prompt={es ? 'Quisiera información sobre disponibilidad y tarifas.' : 'I would like information about availability and rates.'}>{es ? 'Disponibilidad y tarifas' : 'Availability & rates'}</button>
       </div>
       <section class="lead-view" aria-labelledby="olivia-contact-title" hidden>
         <h3 id="olivia-contact-title">{es ? 'Solicitar información' : 'Request information'}</h3>
@@ -114,7 +114,7 @@ const es = lang === 'es';
   </template>
 </luxury-olivia>
 <script>
-  import { isEnquiryIntent, isPhoneNumber, todayInZihuatanejo } from '../../infrastructure/olivia/enquiry.mjs';
+  import { isPhoneNumber, todayInZihuatanejo } from '../../infrastructure/olivia/enquiry.mjs';
 
   class LuxuryOlivia extends HTMLElement {
     connectedCallback() {
@@ -172,7 +172,7 @@ const es = lang === 'es';
       addMessage(es ? 'Hola, soy Olivia, tu concierge de villas. ¿Frente al mar en El Ensueño o sobre la bahía en El Murmullo? Cuéntame cómo imaginas tu estancia; te ayudo a descubrir las villas y a contactar a reservaciones.' : 'Hello, I’m Olivia, your villa concierge. Beachfront at El Ensueño or above the bay at El Murmullo? Tell me what your ideal stay looks like. I can help you explore the villas and connect with reservations.');
       const update = () => {
         input.disabled = !consent.checked || busy || leadBusy; sendButton.disabled = input.disabled;
-        actions.forEach(button => { button.disabled = button.hasAttribute('data-enquiry') ? busy || leadBusy : input.disabled; });
+        actions.forEach(button => { button.disabled = input.disabled; });
         openContact.disabled = busy || leadBusy; leadSubmit.disabled = !consent.checked || busy || leadBusy;
         back.disabled = leadBusy; consent.disabled = leadBusy;
         leadForm.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach(field => { field.disabled = leadBusy; });
@@ -192,10 +192,6 @@ const es = lang === 'es';
         if (!consent.checked || busy || !text.trim()) return;
         text = text.trim();
         addMessage(text, true); lastUserMessage = text; input.value = '';
-        if (isEnquiryIntent(text)) {
-          if (!leadMessage.value.includes(text)) leadMessage.value = [leadMessage.value, text].filter(Boolean).join('\n\n');
-          showLead(true); return;
-        }
         busy = true; update(); error.hidden = true;
         const pending = addMessage(''); pending.classList.add('typing');
         const replyLabel = document.createElement('span'); replyLabel.className = 'sr-only'; replyLabel.textContent = es ? 'Olivia está respondiendo…' : 'Olivia is replying…'; pending.append(replyLabel);
@@ -214,10 +210,7 @@ const es = lang === 'es';
         } finally { busy = false; update(); messages.removeAttribute('aria-busy'); messages.scrollTop = messages.scrollHeight; if (!panel.hidden) input.focus(); }
       };
       form.addEventListener('submit', event => { event.preventDefault(); void send(input.value); });
-      actions.forEach(button => button.addEventListener('click', () => {
-        if (button.hasAttribute('data-enquiry')) { if (!leadMessage.value) leadMessage.value = button.dataset.prompt!; showLead(true); }
-        else void send(button.dataset.prompt!);
-      }));
+      actions.forEach(button => button.addEventListener('click', () => { void send(button.dataset.prompt!); }));
       leadForm.addEventListener('submit', async event => {
         event.preventDefault();
         if (!consent.checked || busy || leadBusy) return;

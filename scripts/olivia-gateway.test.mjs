@@ -40,6 +40,31 @@ const arrivalDate = `${new Date().getUTCFullYear() + 1}-03-12`;
 const departureDate = `${new Date().getUTCFullYear() + 1}-03-17`;
 const enquiry = { action: 'contact', contactFormVersion: 2, language: 'en', firstName: 'Test', lastName: 'Visitor', name: 'Test Visitor', arrivalDate, departureDate, email: 'visitor@example.test', phone: '+1 555 0100', whatsapp: '+52 755 123 4567', message: 'Please contact me about dates.', consent: true };
 
+test('information, rates, availability and booking questions all reach the AI without sending an enquiry', async t => {
+  const { post, calls } = await fixture(t);
+  let conversation;
+  for (const [message, language] of [
+    ['Can you give me more information about the villas?', 'en'],
+    ['What services are available at El Ensueño?', 'en'],
+    ['What are your rates?', 'en'],
+    ['I would like to book a villa', 'en'],
+    ['Quisiera información sobre disponibilidad y tarifas.', 'es'],
+    ['Je voudrais des informations sur les villas', 'en'],
+    ['Quelles sont vos disponibilités ?', 'en'],
+  ]) {
+    const response = await post({ message, language, conversation });
+    assert.equal(response.status, 200, message);
+    const reply = await response.json();
+    assert.ok(reply.answer, message);
+    const upstream = calls.filter(call => call.url.endsWith('/v1/chat')).at(-1);
+    assert.equal(upstream.body.message, message);
+    assert.equal(upstream.body.conversation_id, conversation ? id : undefined);
+    conversation = reply.conversation;
+  }
+  assert.equal(calls.filter(call => call.url.endsWith('/v1/chat')).length, 7);
+  assert.equal(calls.filter(call => call.url.includes('formspree')).length, 0);
+});
+
 test('chat remains separate from Formspree; explicit enquiry includes the authoritative conversation', async t => {
   const { post, calls } = await fixture(t);
   const chat = await post({ message: 'How many guests?', language: 'en' });
