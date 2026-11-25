@@ -22,7 +22,7 @@ export function createGateway(env = process.env, fetcher = fetch) {
     if (!response.ok || health.status !== 'ok' || !/^3\.6(?:\.|$)/.test(health.version)) throw new Error('Olivia 3.6 core unavailable');
     checked = Date.now() + 30000; return health.version;
   }
-  async function upstream(path, body, retry = true) {
+  async function upstream(path, body, retry = true, allowMissing = false) {
     if (expires < Date.now()) {
       const response = await fetcher(`${core}/v1/auth/login`, {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Tenant-ID': tenant },
@@ -37,7 +37,8 @@ export function createGateway(env = process.env, fetcher = fetch) {
       headers: { 'Content-Type': 'application/json', 'X-Tenant-ID': tenant, Authorization: `Bearer ${token}` },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }), signal: AbortSignal.timeout(50000),
     });
-    if (response.status === 401 && retry) { expires = 0; return upstream(path, body, false); }
+    if (response.status === 401 && retry) { expires = 0; return upstream(path, body, false, allowMissing); }
+    if (response.status === 404 && allowMissing) return null;
     if (!response.ok) throw new Error(`Core request failed (${response.status})`);
     return response.json();
   }
@@ -88,9 +89,9 @@ export function createGateway(env = process.env, fetcher = fetch) {
         const operation = (async () => {
           let transcript = '';
           if (cid) {
-            const record = await upstream(`/v1/conversations/${cid}`);
-            if (record.id !== cid || !Array.isArray(record.messages)) throw new Error('Conversation unavailable');
-            transcript = record.messages.filter(message => ['user', 'assistant'].includes(message.role)).slice(-60)
+            const record = await upstream(`/v1/conversations/${cid}`, undefined, true, true);
+            if (record && (record.id !== cid || !Array.isArray(record.messages))) throw new Error('Conversation unavailable');
+            transcript = (record?.messages || []).filter(message => ['user', 'assistant'].includes(message.role)).slice(-60)
               .map(message => `${message.role === 'user' ? 'Visitor' : 'Olivia'}: ${message.content}`).join('\n\n').slice(-30000);
           }
           const stay = details.contactFormVersion === 2 ? `\n\n--- Stay and contact details ---\nFirst name: ${details.firstName}\nLast name: ${details.lastName}\nArrival: ${details.arrivalDate}\nDeparture: ${details.departureDate || 'Not specified'}\nMobile: ${details.phone || 'Not specified'}\nWhatsApp: ${details.whatsapp || 'Not specified'}` : '';

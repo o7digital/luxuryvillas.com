@@ -15,7 +15,7 @@ async function fixture(t, options = {}) {
     if (url.endsWith('/health')) return json({ status: 'ok', version: options.version || '3.6.0' });
     if (url.endsWith('/v1/auth/login')) return json({ access_token: 'test-only-token' });
     if (url.endsWith('/v1/chat')) return json({ answer: 'Each villa has four suites for up to eight guests.', conversation_id: id });
-    if (url.endsWith(`/v1/conversations/${id}`)) return json({ id, messages: [
+    if (url.endsWith(`/v1/conversations/${id}`)) return options.missingConversation ? json({ error: 'Not found' }, 404) : json({ id, messages: [
       { role: 'system', content: 'Private instructions must never enter the enquiry.' },
       { role: 'user', content: 'We are eight guests.' },
       { role: 'assistant', content: 'Each villa accommodates up to eight guests.' },
@@ -154,4 +154,15 @@ test('WhatsApp-only enquiries are accepted and changed dates are a separate enqu
 test('already-open pages can still submit their previous contact form', async t => {
   const { post } = await fixture(t);
   assert.equal((await post({ action: 'contact', language: 'en', name: 'Existing Visitor', email: 'visitor@example.test', message: 'Previous form still open.', consent: true })).status, 200);
+});
+
+test('a signed enquiry opened before the first AI message can be submitted', async t => {
+  const { post, calls } = await fixture(t, { missingConversation: true });
+  const chat = await post({ message: 'Hello', language: 'en' });
+  const { conversation } = await chat.json();
+  const response = await post({ ...enquiry, conversation });
+  assert.equal(response.status, 200);
+  const sent = calls.find(call => call.url.includes('formspree')).body;
+  assert.ok(sent.message.includes(enquiry.message));
+  assert.ok(!sent.message.includes('Olivia conversation'));
 });

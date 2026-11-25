@@ -6,6 +6,22 @@ page content and SEO are preserved. Consent is required before chatting.
 The conversation identifier stays in the current page; the private core
 stores the conversation in PostgreSQL.
 
+The Channel Manager at `https://olivia-ai.o7digital.com/inbox?client=luxuryvillas`
+shows this website under **Luxury Villas by La Casa Que Canta**, separately
+from the hotel. The reservations account is restricted to `luxuryvillas`.
+The server-only `LUXURYVILLAS_INBOX_KEY`, configured on both Vercel projects,
+authenticates the fixed `/api/internal/luxuryvillas` bridge. Visitor requests
+are saved before AI generation and replies afterward. Stable request IDs
+deduplicate retries. Historical engine messages retain their timestamps;
+system instructions are excluded.
+
+Operators can take control and reply from the manager. While in manual mode,
+the website does not invoke the AI. The open widget polls its signed
+conversation every five seconds via `/api/olivia/messages/`, exposing only
+operator text, IDs, timestamps and public status. Contact and stay details
+are copied only after the visitor explicitly submits the consented form.
+Formspree confirmation remains required before showing enquiry success.
+
 ## Chat and enquiries
 
 Browser → `POST /api/olivia/` → authenticated Luxury Villas gateway → private

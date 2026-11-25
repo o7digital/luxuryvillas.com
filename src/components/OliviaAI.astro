@@ -117,6 +117,8 @@ const es = lang === 'es';
   import { isBookingIntent, isPhoneNumber, todayInZihuatanejo } from '../../infrastructure/olivia/enquiry.mjs';
 
   class LuxuryOlivia extends HTMLElement {
+    private polling?: ReturnType<typeof setInterval>;
+    disconnectedCallback() { clearInterval(this.polling); }
     connectedCallback() {
       if (this.shadowRoot) return;
       const template = this.querySelector('template');
@@ -165,10 +167,35 @@ const es = lang === 'es';
       let leadBusy = false;
       let lastUserMessage = '';
       let conversation: string | undefined;
+      let failedRequest: { text: string; id: string } | undefined;
+      let enquiryRequestId: string | undefined;
+      const operatorMessages = new Set<string>();
       const addMessage = (text: string, user = false) => {
         const p = document.createElement('p'); p.className = user ? 'message user' : 'message'; p.textContent = text;
         messages.append(p); messages.scrollTop = messages.scrollHeight; return p;
       };
+      const setConversationStatus = (status: string) => {
+        root.querySelector<HTMLElement>('.footnote')!.textContent = status === 'manual'
+          ? (es ? 'El equipo de reservaciones atiende esta conversación.' : 'The reservations team is handling this conversation.')
+          : (es ? 'Disponibilidad y tarifas confirmadas por reservas.' : 'Availability and rates confirmed by reservations.');
+      };
+      let polling = false;
+      this.polling = setInterval(async () => {
+        if (polling || busy || leadBusy || panel.hidden || !consent.checked || !conversation) return;
+        polling = true;
+        try {
+          const response = await fetch(`/api/olivia/messages/?conversation=${encodeURIComponent(conversation)}`, { cache: 'no-store', signal: AbortSignal.timeout(12000) });
+          if (!response.ok) return;
+          const data = await response.json();
+          setConversationStatus(data.status);
+          for (const message of data.messages || []) {
+            if (typeof message.id !== 'string' || typeof message.content !== 'string' || operatorMessages.has(message.id)) continue;
+            operatorMessages.add(message.id);
+            addMessage(`${es ? 'Reservaciones' : 'Reservations'}: ${message.content}`);
+          }
+        } catch { /* Keep the current conversation available during a polling failure. */ }
+        finally { polling = false; }
+      }, 5000);
       addMessage(es ? 'Hola, soy Olivia, tu concierge de villas. ¿Frente al mar en El Ensueño o sobre la bahía en El Murmullo? Cuéntame cómo imaginas tu estancia; te ayudo a descubrir las villas y a contactar a reservaciones.' : 'Hello, I’m Olivia, your villa concierge. Beachfront at El Ensueño or above the bay at El Murmullo? Tell me what your ideal stay looks like. I can help you explore the villas and connect with reservations.');
       const update = () => {
         input.disabled = !consent.checked || busy || leadBusy; sendButton.disabled = input.disabled;
@@ -196,18 +223,23 @@ const es = lang === 'es';
           if (!leadMessage.value.includes(text)) leadMessage.value = [leadMessage.value, text].filter(Boolean).join('\n\n');
           showLead(true); return;
         }
+        const requestId = failedRequest?.text === text ? failedRequest.id : crypto.randomUUID();
         busy = true; update(); error.hidden = true;
         const pending = addMessage(''); pending.classList.add('typing');
         const replyLabel = document.createElement('span'); replyLabel.className = 'sr-only'; replyLabel.textContent = es ? 'Olivia está respondiendo…' : 'Olivia is replying…'; pending.append(replyLabel);
         for (let index = 0; index < 3; index++) { const dot = document.createElement('span'); dot.className = 'typing-dot'; dot.setAttribute('aria-hidden', 'true'); pending.append(dot); }
         messages.setAttribute('aria-busy', 'true');
         try {
-          const response = await fetch('/api/olivia/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, language: es ? 'es' : 'en', conversation, consent: true }), signal: AbortSignal.timeout(60000) });
-          if (!response.ok) throw new Error(String(response.status));
+          const response = await fetch('/api/olivia/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, language: es ? 'es' : 'en', conversation, page: location.pathname, requestId, consent: true }), signal: AbortSignal.timeout(60000) });
           const data = await response.json();
+          if (typeof data.conversation === 'string') conversation = data.conversation;
+          if (!response.ok) throw new Error(String(response.status));
           if (typeof data.answer !== 'string' || typeof data.conversation !== 'string') throw new Error('Invalid response');
+          failedRequest = undefined; setConversationStatus(data.status);
+          if (data.status === 'manual') { pending.remove(); return; }
           pending.classList.remove('typing'); pending.textContent = data.answer; conversation = data.conversation; this.dataset.version = data.version;
         } catch (err) {
+          failedRequest = { text, id: requestId };
           pending.remove(); input.value = text;
           error.textContent = (err as Error).message === '429' ? (es ? 'Demasiados mensajes. Espera un minuto e inténtalo de nuevo.' : 'Too many messages. Wait a minute and try again.') : (es ? 'Olivia no está disponible ahora. Inténtalo de nuevo o contacta al equipo de reservas.' : 'Olivia is unavailable right now. Try again or contact reservations.');
           error.hidden = false;
@@ -221,14 +253,17 @@ const es = lang === 'es';
         setDateBounds(); validatePhones();
         if (!leadForm.reportValidity()) return;
         const fields = new FormData(leadForm);
+        enquiryRequestId ||= crypto.randomUUID();
         leadBusy = true; update(); leadFeedback.textContent = es ? 'Enviando…' : 'Sending…';
         try {
           const response = await fetch('/api/olivia/contact/', {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(60000),
-            body: JSON.stringify({ contactFormVersion: 2, firstName: fields.get('firstName'), lastName: fields.get('lastName'), arrivalDate: fields.get('arrivalDate'), departureDate: fields.get('departureDate'), email: fields.get('email'), phone: fields.get('phone'), whatsapp: fields.get('whatsapp'), message: fields.get('message'), language: es ? 'es' : 'en', conversation, consent: true }),
+            body: JSON.stringify({ contactFormVersion: 2, firstName: fields.get('firstName'), lastName: fields.get('lastName'), arrivalDate: fields.get('arrivalDate'), departureDate: fields.get('departureDate'), email: fields.get('email'), phone: fields.get('phone'), whatsapp: fields.get('whatsapp'), message: fields.get('message'), language: es ? 'es' : 'en', conversation, page: location.pathname, requestId: enquiryRequestId, consent: true }),
           });
           const data = await response.json();
+          if (typeof data.conversation === 'string') conversation = data.conversation;
           if (!response.ok || data.submitted !== true) throw new Error('Enquiry not sent');
+          enquiryRequestId = undefined;
           this.dataset.version = data.version; leadForm.reset(); setDateBounds(); leadFeedback.textContent = ''; showLead(false);
           addMessage(es ? 'Tu consulta y tu conversación se han enviado al equipo de reservaciones. Gracias.' : 'Your enquiry and conversation have been sent to our reservations team. Thank you.');
         } catch {
