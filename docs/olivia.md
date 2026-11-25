@@ -11,12 +11,14 @@ stores the conversation in PostgreSQL.
 Browser → `POST /api/olivia/` → authenticated Luxury Villas gateway → private
 Olivia 3.6 `/v1/chat`. Chatting alone never sends a Formspree submission.
 
-Every chat message goes to Olivia, including information, rates, availability
-and booking questions. All suggested questions, including “Availability & rates”,
-receive a chat answer after consent. Only the visitor's explicit click on
-“Request information” opens the form. Olivia answers with approved information
-first, explains when reservations must confirm details and offers the form
-when the visitor wants a quote, to reserve or to be contacted.
+Information, rates, availability, booking-process and policy questions go to
+Olivia. All suggested questions, including “Availability & rates”, receive a
+chat answer after consent. An explicit request to book a stay in English,
+French or Spanish opens the form with that request prefilled. Information
+requests, negated requests and booking changes never trigger it. Visitors can
+also click “Request information” to open it. Olivia answers with approved
+information first, explains when reservations must confirm details and offers
+the form when the visitor wants a quote or to be contacted.
 The visitor's latest request prefills the form; earlier chat messages are attached
 from the server when the visitor submits. Opening the form sends nothing.
 
@@ -115,7 +117,8 @@ Run `npm run build`, `npm run test:seo` and `npm run test:olivia`. Gateway tests
 exercise separation of chat/contact, server-authoritative transcript,
 consent/authentication, rejection of older engines, delivery failures,
 retries, duplicate suppression, qualified contact fields, dates, phone/WhatsApp
-validation, information questions staying in chat and rate limits. Those Formspree calls are
+validation, explicit booking intent, information questions staying in chat
+and rate limits. Those Formspree calls are
 mocked and send no messages. The packaged function is imported outside the
 workspace to detect missing runtime dependencies.
 
